@@ -1,0 +1,19 @@
+{
+  "name": "lockkipper",
+  "version": "1.0.0",
+  "description": "app for passwords management ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TeDdi-pixel/lockkipper.git"
+  },
+  "author": "whyME",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TeDdi-pixel/lockkipper/issues"
+  },
+  "homepage": "https://github.com/TeDdi-pixel/lockkipper#readme"
+}
