@@ -1,0 +1,60 @@
+//initial styles
+@import "./initial-styles/nullstyle.scss";
+@import "./initial-styles/mixins";
+@import "./initial-styles/variables";
+@import "./initial-styles/fonts";
+
+//component styles
+@import "../scss/componentStyles/startPage.scss";
+@import "../scss/componentStyles/form.scss";
+@import "../scss/componentStyles/menu.scss";
+@import "../scss/componentStyles/header.scss";
+@import "../scss/componentStyles/main.scss";
+@import "../scss/componentStyles/filters.scss";
+@import "../scss/componentStyles/toggleList.scss";
+@import "../scss/componentStyles/table.scss";
+
+#root {
+  height: 100%;
+}
+
+.loading-spinner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 150px;
+}
+
+.entry-container {
+  margin: 0 auto;
+  max-width: 400px;
+}
+
+.container {
+  display: flex;
+  height: 100%;
+}
+
+.content__wrapper {
+  width: 100%;
+  height: 100%;
+  padding: 21px;
+  @include default-font();
+}
+
+.line-through {
+  position: relative;
+  display: block;
+  margin-top: 17.5px;
+  margin-bottom: 30px;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: rgba(0, 0, 0, 0.125);
+  }
+}

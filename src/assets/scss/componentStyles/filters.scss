@@ -1,0 +1,43 @@
+.filters {
+  max-width: 400px;
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8.4px 17.5px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    &-title {
+      @include default-font(14px, 500);
+    }
+  }
+  &__question-mark {
+    cursor: pointer;
+    font-size: 18px;
+  }
+  &__body {
+    padding: 17.5px;
+    min-height: 50px;
+    width: 100%;
+  }
+  &__trash{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+    padding-top: 27.5px;
+    padding-bottom: 10px;
+    cursor: pointer;
+    transition: color ease 0.2s;
+    svg{
+      font-size: 16px;
+    }
+    &:hover{
+      color: #175dde;
+    
+    }
+  }
+}

@@ -1,0 +1,86 @@
+.table {
+  border-collapse: collapse;
+  width: 100%;
+  &__wrapper {
+    width: 100%;
+    padding-left: 17.5px;
+  }
+
+  &-head {
+    &__row {
+      border-bottom: 2px solid #ced4dc;
+      &-cell {
+        @include default-font(14px, #666666, 600);
+        padding: 10.5px;
+
+        &:first-child {
+          min-width: 84px;
+          width: 132px;
+          span {
+            vertical-align: middle;
+          }
+        }
+        &:last-child {
+          cursor: pointer;
+        }
+      }
+      .cell {
+        &__options {
+          display: flex;
+          justify-content: flex-end;
+          padding: 10.5px;
+        }
+      }
+    }
+  }
+  &-body {
+    &__row {
+      &:first-child {
+        border-top: none;
+      }
+      border-top: 1px solid #ced4dc;
+      &-cell {
+        padding: 10.5px;
+        &:nth-child(1) {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+        &-icon {
+          @include default-font(23px, #666666);
+          max-height: 23px;
+          height: 23px;
+        }
+        &:last-child {
+          color: #666666;
+          cursor: pointer;
+        }
+        .cell {
+          &__name {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 5px;
+            &-main {
+              @include default-font(14px, #175dde, 600);
+            }
+            &-additional {
+              @include default-font(14px, #666666);
+            }
+          }
+          &__owner {
+            @include default-font(10.5px, #666666, 600);
+            background-color: rgb(255, 163, 163);
+            padding: 1.75px 5.25px;
+            border-radius: 0.25rem;
+          }
+          &__options {
+            display: flex;
+            justify-content: flex-end;
+            padding: 10.5px;
+          }
+        }
+      }
+    }
+  }
+}

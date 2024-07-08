@@ -1,0 +1,22 @@
+.start-page {
+    &__wrapper {
+      padding: 100px 25px 25px 25px;
+    }
+    &__title-wrapper {
+      display: flex;
+      justify-content: center;
+      @include default-font(35px);
+      @include adaptive-font(35, 25);
+      align-items: center;
+    }
+    &__title{
+      font-size: 45px;
+      @include adaptive-font(45, 30);
+    }
+    &-description{
+      @include adaptive-font(20, 16);
+      @include default-font(20px);
+      margin-top: 20px;
+      text-align: center;
+    }
+  }
