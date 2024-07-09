@@ -5,11 +5,14 @@ const config: ToastOptions = {
   position: "bottom-right",
   autoClose: 3000,
   transition: Zoom,
+  theme: 'dark'
 };
 
 export const notify = (message: string) => {
   toast.success(message, config);
 };
+
+
 
 export const showError = (message: string) => {
   toast.error(message, config);

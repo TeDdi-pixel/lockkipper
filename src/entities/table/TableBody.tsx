@@ -4,15 +4,21 @@ import { TypeCellsData } from "../../widgets/contentTable/config/config";
 
 type TypeProps = {
   data: TypeCellsData[];
+  checkedItems: number[];
+  handleSelectCheckbox: (itemId: number) => void;
 };
 
-const TableBody = ({ data }: TypeProps) => {
+const TableBody = ({ data, checkedItems, handleSelectCheckbox }: TypeProps) => {
   return (
     <tbody className="table-body">
       {data.map((cell) => (
         <tr key={cell.id} className="table-body__row">
           <td className="table-body__row-cell">
-            <Checkbox size="small" />
+            <Checkbox
+              size="small"
+              checked={checkedItems.includes(cell.id)}
+              onChange={() => handleSelectCheckbox(cell.id)}
+            />
             <span className="table-body__row-cell-icon">{cell.icon}</span>
           </td>
           <td className="table-body__row-cell">

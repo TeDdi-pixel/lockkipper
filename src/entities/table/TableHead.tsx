@@ -1,12 +1,21 @@
 import { Checkbox } from "@mui/material";
 import { BsThreeDotsVertical } from "react-icons/bs";
 
-const TableHead = () => {
+type TypeProps = {
+  handleCheckAll: () => void;
+  allChecked: boolean;
+};
+
+const TableHead = ({ handleCheckAll, allChecked }: TypeProps) => {
   return (
     <thead className="table-head">
       <tr className="table-head__row">
         <th className="table-head__row-cell">
-          <Checkbox size="small" />
+          <Checkbox
+            size="small"
+            onChange={handleCheckAll}
+            checked={allChecked}
+          />
           <span>All</span>
         </th>
         <th className="table-head__row-cell">Name</th>

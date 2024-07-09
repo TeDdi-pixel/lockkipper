@@ -1,9 +1,9 @@
 import { FaLock } from "react-icons/fa6";
-import StartPageForm from "../widgets/forms/startPageForms/GetEmailForm";
-import EntryFormLayout from "../layout/entryFormLayout/EntryFormLayout";
+import StartPageForm from "../../widgets/forms/startPageForms/GetEmailForm";
+import EntryFormLayout from "../../layout/entryFormLayout/EntryFormLayout";
 import { useSelector } from "react-redux";
-import { RootState } from "../store/types/types";
-import GetPasswordForm from "../widgets/forms/startPageForms/GetPasswordForm";
+import { RootState } from "../../store/types/types";
+import GetPasswordForm from "../../widgets/forms/startPageForms/GetPasswordForm";
 
 const StartPage = () => {
   

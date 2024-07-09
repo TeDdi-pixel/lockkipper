@@ -2,10 +2,7 @@ import { Button } from "@mui/material";
 import CustomTypography from "../../../shared/ui/CustomTypography";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import {
-  setEmail,
-  rememberEmail,
-} from "../../../store/slices/loginFormSlice";
+import { setEmail, rememberEmail } from "../../../store/slices/loginFormSlice";
 import AlternativeEntryLine from "../../../entities/forms/getEmailForm/AlternativeEntryLine";
 import EmailFormFields from "../../../features/getEmailFormFields/EmailFormFields";
 import GoogleIcon from "@mui/icons-material/Google";

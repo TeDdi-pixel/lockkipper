@@ -4,22 +4,26 @@ import { PiTelegramLogo } from "react-icons/pi";
 import { FiTool } from "react-icons/fi";
 import { VscSettings } from "react-icons/vsc";
 import { IoSettingsOutline } from "react-icons/io5";
+import { Link } from "react-router-dom";
 const Menu = () => {
   const menuItems = [
     {
       id: 0,
       icon: <BsCollection />,
       text: "Vaults",
+      path: "/vault",
     },
     {
       id: 1,
       icon: <PiTelegramLogo />,
       text: "Send",
+      path: "/sends",
     },
     {
       id: 2,
       icon: <FiTool />,
       text: "Tools",
+      path: "/tools",
       options: [
         { id: 0, text: "Generator" },
         { id: 1, text: "Import data" },
@@ -30,24 +34,25 @@ const Menu = () => {
       id: 3,
       icon: <VscSettings />,
       text: "Reports",
+      path: "/reports",
     },
-    { id: 4, icon: <IoSettingsOutline />, text: "Settings" },
+    { id: 4, icon: <IoSettingsOutline />, text: "Settings", path: "/settings" },
   ];
   return (
     <div className="menu">
-      <div className="menu__logo">
+      <Link to="/vault" className="menu__logo">
         <div className="menu__logo-icon">
           <FaShieldAlt />
         </div>
         <span className="menu__logo-text">Password Manager</span>
-      </div>
+      </Link>
       <ul className="menu__item-list">
         {menuItems.map((item) => (
           <li key={item.id} className="menu__item">
-            <div className="menu__item-main">
+            <Link to={item.path} className="menu__item-main">
               <span className="menu__item-icon">{item.icon}</span>
               <span className="menu__item-text">{item.text}</span>
-            </div>
+            </Link>
           </li>
         ))}
       </ul>

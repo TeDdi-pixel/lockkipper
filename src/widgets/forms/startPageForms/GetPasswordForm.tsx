@@ -10,16 +10,11 @@ import {
 import CustomTypography from "../../../shared/ui/CustomTypography";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState, TypeUser } from "../../../store/types/types";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth, db } from "../../../services/firebase-config";
-import AlternativeEntryLine from "../../../entities/forms/getEmailForm/AlternativeEntryLine";
-import { showError } from "../../../helpers/notify";
+import { useDispatch } from "react-redux";
 import { setPassword } from "../../../store/slices/loginFormSlice";
-import { setUser, setUserLoggedIn } from "../../../store/slices/userSlice";
-import { doc, getDoc } from "firebase/firestore";
-import Cookies from "js-cookie";
+import { signInWithPassword } from "../../../store/asyncThunks/signInWithPassword";
+import { ThunkDispatch } from "redux-thunk";
+import AlternativeEntryLine from "../../../entities/forms/getEmailForm/AlternativeEntryLine";
 
 const styles = {
   fontFamily: "Montserrat",
@@ -30,9 +25,8 @@ const styles = {
 
 const GetPasswordForm = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
   const handleShowPassword = () => setShowPassword((show) => !show);
-  const { email } = useSelector((state: RootState) => state.loginForm);
   const handleMouseDownPassword = (
     event: React.MouseEvent<HTMLButtonElement>
   ) => {
@@ -41,38 +35,7 @@ const GetPasswordForm = () => {
   const { handleSubmit, register } = useForm<{ password: string }>();
   const onSubmit: SubmitHandler<{ password: string }> = async (data) => {
     if (data) dispatch(setPassword(data.password));
-
-    if (!email) return;
-    const cookiesUser = Cookies.get("user");
-
-    try {
-      const userCredential = await signInWithEmailAndPassword(
-        auth,
-        email,
-        data.password
-      );
-      const user = userCredential.user;
-
-      if (cookiesUser && JSON.parse(cookiesUser).uid === user.uid) {
-        dispatch(setUser(JSON.parse(cookiesUser)));
-        dispatch(setUserLoggedIn(true))
-      } else {
-        const docRef = doc(db, "users", user.uid);
-        const docSnap = await getDoc(docRef);
-
-        if (docSnap.exists()) {
-          const userData = docSnap.data() as TypeUser;
-          dispatch(setUser(userData));
-          Cookies.set("user", JSON.stringify(userData), { expires: 7 });
-          dispatch(setUserLoggedIn(true))
-        } else {
-          console.log("No such document!");
-        }
-      }
-    } catch (error) {
-      console.log(error);
-      showError(`${error}`);
-    }
+    dispatch(signInWithPassword());
   };
 
   return (
@@ -105,7 +68,7 @@ const GetPasswordForm = () => {
       <Button type="submit" variant="contained">
         <CustomTypography text="Log in with master password" />
       </Button>
-      
+
       <AlternativeEntryLine
         labelText="Your first time here?"
         buttonText="Create an account"

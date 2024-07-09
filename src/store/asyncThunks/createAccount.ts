@@ -1,8 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../../services/firebase-config";
-import { doc, getDoc, setDoc } from "firebase/firestore";
-import Cookies from "js-cookie";
+import { doc, setDoc } from "firebase/firestore";
 import { showError } from "../../helpers/notify";
 import { TypeRegistration } from "../../widgets/forms/startPageForms/types/types";
 
@@ -18,10 +17,10 @@ export const createAccount = createAsyncThunk(
       if (!userCredential) return;
 
       const user = userCredential.user;
-      const docRef = doc(db, "users", user.uid);
-      const docSnap = await getDoc(docRef);
 
-      let updatedUser = {
+      const docRef = doc(db, "users", user.uid);
+
+      let newFirebaseUser = {
         uid: user.uid,
         email: data.email,
         hint: data.hint,
@@ -30,14 +29,9 @@ export const createAccount = createAsyncThunk(
         photoURL: user.photoURL,
       };
 
-      if (!docSnap.exists()) {
-        await setDoc(docRef, updatedUser);
-      } else {
-        updatedUser = docSnap.data() as TypeRegistration;
-      }
+      await setDoc(docRef, newFirebaseUser);
 
-      Cookies.set("user", JSON.stringify(updatedUser), { expires: 7 });
-      return updatedUser;
+      return newFirebaseUser;
     } catch (error) {
       console.error(error);
       showError(`${error}`);

@@ -18,6 +18,6 @@ export default defineConfig({
   optimizeDeps: {
     force: true,
     include: ['react', 'react-dom', 'react-hook-form', 'react-icons', 'react-router-dom'],
-    exclude: ['firebase'],
+    exclude: ['firebase','browser-image-compression'],
   },
 });

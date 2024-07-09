@@ -17,8 +17,8 @@ const Header = ({ title }: { title: string }) => {
         {/* <button className="header__lock">
           <CiLock />
         </button> */}
-        <button className="header__photo" onClick={handleSettings}>
-          <ProfileImage />
+        <button onClick={handleSettings}>
+          <ProfileImage width="45px"/>
         </button>
       </div>
       <Settings status={active} />

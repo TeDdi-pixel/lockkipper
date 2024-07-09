@@ -2,12 +2,13 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { signInWithPopup } from "firebase/auth";
 import { auth, db, googleProvider } from "../../services/firebase-config";
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import Cookies from "js-cookie";
 import { TypeUser } from "../types/types";
+import Cookies from "js-cookie";
+import { showError } from "../../helpers/notify";
 
-export const signInWithGoogle = createAsyncThunk<TypeUser | null>(
+export const signInWithGoogle = createAsyncThunk(
   "user/signInWithGoogle",
-  async (_) => {
+  async () => {
     try {
       const userCredential = await signInWithPopup(auth, googleProvider);
       const user = userCredential.user;
@@ -16,7 +17,7 @@ export const signInWithGoogle = createAsyncThunk<TypeUser | null>(
       const docRef = doc(db, "users", user.uid);
       const docSnap = await getDoc(docRef);
 
-      let updatedUser;
+      let firebaseUser;
 
       if (!docSnap.exists()) {
         await setDoc(docRef, {
@@ -28,13 +29,17 @@ export const signInWithGoogle = createAsyncThunk<TypeUser | null>(
           password: null,
         });
       } else {
-        updatedUser = docSnap.data();
+        firebaseUser = docSnap.data() as TypeUser;
+
+        if (firebaseUser.photoURL) {
+          Cookies.set("user", JSON.stringify(firebaseUser));
+        }
       }
 
-      Cookies.set("user", JSON.stringify(updatedUser), { expires: 7 });
-      return updatedUser;
+      return firebaseUser;
     } catch (error) {
       console.log("Error signing in with Google:", error);
+      showError(`${error}`);
       return null;
     }
   }
