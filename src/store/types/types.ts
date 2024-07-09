@@ -33,3 +33,8 @@ export type TypeUserSlice = {
   profilePhoto: string | null;
   userLoggedIn: boolean;
 };
+
+export type TypeMyAccountForm = {
+  newEmail?: string;
+  newDisplayName?: string;
+};

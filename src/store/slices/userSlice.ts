@@ -39,6 +39,14 @@ export const userSlice = createSlice({
     setUserLoggedIn: (state, action: PayloadAction<boolean>) => {
       state.userLoggedIn = action.payload;
     },
+    setUserEmail: (state, action: PayloadAction<string>) => {
+      state.user.email = action.payload;
+      Cookies.set("user", JSON.stringify(state.user));
+    },
+    setDisplayName: (state, action: PayloadAction<string>) => {
+      state.user.displayName = action.payload;
+      Cookies.set("user", JSON.stringify(state.user));
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -80,6 +88,12 @@ export const userSlice = createSlice({
   },
 });
 
-export const { setUser, setProfilePhoto, setUserLoggedIn } = userSlice.actions;
+export const {
+  setUser,
+  setProfilePhoto,
+  setUserLoggedIn,
+  setUserEmail,
+  setDisplayName,
+} = userSlice.actions;
 
 export default userSlice.reducer;

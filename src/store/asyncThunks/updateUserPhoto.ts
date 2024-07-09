@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { db } from "../../services/firebase-config";
 import { doc, updateDoc } from "firebase/firestore";
-import { notify, showError } from "../../helpers/notify";
+import { showError } from "../../helpers/notify";
 import { RootState } from "../types/types";
 import { uploadProfilePhoto } from "../../helpers/uploadUserPhoto";
 import { downloadUserPhoto } from "../../helpers/downloadUserPhoto";

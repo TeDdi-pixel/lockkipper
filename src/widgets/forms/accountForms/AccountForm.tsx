@@ -1,24 +1,27 @@
 import { Button, TextField } from "@mui/material";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../../store/types/types";
+import { RootState, TypeMyAccountForm } from "../../../store/types/types";
 import { uploadProfilePhoto } from "../../../helpers/uploadUserPhoto";
 import useCompression from "../../../hooks/useCompression";
 import { Save } from "@mui/icons-material";
 import ProfilePhotoBlock from "../../../entities/forms/accountForm/ProfilePhotoBlock";
 import { updateUserPhoto } from "../../../store/asyncThunks/updateUserPhoto";
 import { ThunkDispatch } from "redux-thunk";
+import { useForm } from "react-hook-form";
+import { updateUserProfile } from "../../../store/asyncThunks/updateUserProfile";
 
 const AccountForm = () => {
   const { user } = useSelector((state: RootState) => state.user);
-  const [userName, setUserName] = useState(user?.displayName);
-  const [userEmail, setUserEmail] = useState(user?.email);
   const { compressAndConvertToWebp } = useCompression();
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
 
-  const handleUserName = (e: ChangeEvent<HTMLInputElement>) => {
-    setUserName(e.target.value);
-  };
+  const { register, handleSubmit, setValue } = useForm<TypeMyAccountForm>({
+    defaultValues: {
+      newDisplayName: user?.displayName ?? "",
+      newEmail: user?.email ?? "",
+    },
+  });
 
   const handleImage = async (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -32,35 +35,42 @@ const AccountForm = () => {
     }
   };
 
-  const handleUserEmail = (e: ChangeEvent<HTMLInputElement>) => {
-    setUserEmail(e.target.value);
-  };
+  const onSubmit = (data: TypeMyAccountForm) =>
+    dispatch(updateUserProfile(data));
+
   return (
-    <form className="flex flex-col">
+    <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
       <div className="flex gap-[31px] items-center mb-[15.5px]">
         <div className="flex flex-col w-[380px] gap-[31px]">
           <TextField
             label="User name"
-            value={userName}
-            onChange={handleUserName}
             size="small"
             type="text"
             fullWidth
+            {...register("newDisplayName")}
+            inputProps={{ maxLength: 32 }}
+            onChange={(e) => setValue("newDisplayName", e.target.value)}
           />
           <TextField
             type="email"
             label="Email"
-            value={userEmail}
-            onChange={handleUserEmail}
             size="small"
             fullWidth
+            inputProps={{ maxLength: 45 }}
+            {...register("newEmail")}
+            onChange={(e) => setValue("newEmail", e.target.value)}
           />
         </div>
 
         <ProfilePhotoBlock handleImage={handleImage} />
       </div>
 
-      <Button sx={{ maxWidth: "80px" }} variant="contained" endIcon={<Save />}>
+      <Button
+        sx={{ maxWidth: "80px" }}
+        variant="contained"
+        endIcon={<Save />}
+        type="submit"
+      >
         Save
       </Button>
     </form>
