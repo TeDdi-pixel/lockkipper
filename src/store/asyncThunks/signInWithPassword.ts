@@ -10,19 +10,15 @@ type TypeFormData = {
 };
 export const signInWithPassword = createAsyncThunk(
   "user/signInWithPassword",
-  async (formData: TypeFormData, { dispatch }) => {
-    const { email, password } = formData;
+  async (data: TypeFormData, { dispatch }) => {
+    const { email, password } = data;
 
     if (!email || !password) {
       throw new Error("Email and password are required.");
     }
 
     try {
-      const { user: fullUser } = await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
+      const { user: fullUser } = await signInWithEmailAndPassword(auth, email, password);
 
       const user = {
         uid: fullUser.uid,

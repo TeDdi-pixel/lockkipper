@@ -1,58 +1,19 @@
-import { useDispatch, useSelector } from "react-redux";
-import ProfileImage from "../../../shared/ui/ProfileImage";
-import { RootState } from "../../../store/types/types";
-import { actionOptions } from "../config/actionOptions";
-import { Link } from "react-router-dom";
-import { pageOptions } from "../config/pageOptions";
+import ActionOptions from "./ActionOptions";
+import PageOptions from "./PageOptions";
+import PhotoBlock from "./PhotoBlock";
 
-const Settings = ({ status }: { status: boolean }) => {
-  const { user } = useSelector((state: RootState) => state.user);
-  const dispatch = useDispatch();
+export const Settings = ({ active }: { active: boolean }) => {
   return (
     <div
-      className={`header__settings ${status ? "header__settings_active" : ""}`}
+      className={`absolute right-0 top-[50px] border border-border max-w-[210px] w-full rounded-[4px] transition-[transform,opacity] duration-200 ${
+        active
+          ? "bg-background z-[100] opacity-100 translate-y-0"
+          : "opacity-0 translate-y-[-10px] z-[-100]"
+      }`}
     >
-      <div
-        className="px-[14px] py-[12px] flex items-center border-b border-b-[#89929f] justify-between"
-        style={{ zIndex: `${status ? "-100" : "100"}` }}
-      >
-        {user && (
-          <div className="flex gap-[5px] items-center overflow-hidden">
-            <ProfileImage width="45px" />
-            <span>Logged in as {user.displayName}</span>{" "}
-          </div>
-        )}
-      </div>
-      <div className="header__settings-option-list">
-        {pageOptions.map((option) => (
-          <div className="header__settings-option" key={option.id}>
-            {option.icon}
-            <Link
-              to={option.direction}
-              className="header__settings-option-text"
-            >
-              {option.text}
-            </Link>
-          </div>
-        ))}
-      </div>
-      <div
-        className="header__settings-option-list"
-        style={{ borderBottom: "none" }}
-      >
-        {actionOptions.map((option) => (
-          <button
-            className="header__settings-option"
-            key={option.id}
-            onClick={() => option.func?.(dispatch)}
-          >
-            {option.icon}
-            <div className="header__settings-option-text">{option.text}</div>
-          </button>
-        ))}
-      </div>
+      <PhotoBlock />
+      <PageOptions />
+      <ActionOptions />
     </div>
   );
 };
-
-export default Settings;
