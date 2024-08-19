@@ -1,12 +1,10 @@
 import SearchInput from "./SearchInput";
 import ToggleList from "../../../features/toggleList/ToggleList";
 import LineTrough from "../../../shared/LineTrough";
-import {
-  allItems,
-  existingVaults,
-  folders,
-} from "../../../features/toggleList/config/config";
 import TrashItem from "./TrashItem";
+import { existingVaults } from "../config/existingVaults";
+import { allItems } from "../config/allItems";
+import { folders } from "../config/folders";
 
 const FiltersBody = () => {
   return (

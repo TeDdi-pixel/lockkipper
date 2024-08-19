@@ -1,6 +1,6 @@
 import { doc, getDoc } from "firebase/firestore";
 import { TypeUser } from "../../../../store/types/types";
-import { db } from "../../../../services/firebase-config";
+import { db } from "../../../../lib/firebase/config";
 
 export const getUser = async (user: TypeUser) => {
   const docRef = doc(db, "users", user.uid);

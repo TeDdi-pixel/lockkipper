@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { setProfilePhoto } from "../store/slices/userSlice";
+import { setProfilePhoto } from "../store/features/user/userSlice";
 import imageCompression from "browser-image-compression";
 
 const useCompression = () => {

@@ -1,6 +1,6 @@
 import { ref, uploadString } from "firebase/storage";
-import { storage } from "../services/firebase-config";
-import { showError } from "./notify";
+import { storage } from "../lib/firebase/config";
+import { showError } from "./toastify/error";
 
 export const uploadProfilePhoto = async (uid: string, webpUserPhoto: string) => {
   const storageRef = ref(storage, `users/${uid}/userPhoto/photo.webp`);

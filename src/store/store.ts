@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
-import loginFormSlice from "./slices/loginFormSlice";
-import registerFormSlice from "./slices/registerFormSlice";
-import userSlice from "./slices/userSlice";
+import registerFormSlice from "./features/authorization/registerFormSlice";
+import userSlice from "./features/user/userSlice";
+import loginFormSlice from "./features/authorization/loginFormSlice";
 
 export default configureStore({
   reducer: {

@@ -1,5 +1,5 @@
 const MainTitle = ({ title }: { title: string }) => {
-  return <h1 className="header__title">{title}</h1>;
+  return <h1 className="text-[26px] font-medium text-text">{title}</h1>;
 };
 
 export default MainTitle;

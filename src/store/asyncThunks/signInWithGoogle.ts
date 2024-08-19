@@ -1,10 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { signInWithPopup } from "firebase/auth";
-import { auth, db, googleProvider } from "../../services/firebase-config";
+import { auth, db, googleProvider } from "../../lib/firebase/config";
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import { showError } from "../../helpers/notify";
-import { setUser } from "../slices/userSlice";
 import { TypeUser } from "../types/types";
+import { setUser } from "../features/user/userSlice";
+import { showError } from "../../helpers/toastify/error";
 
 export const signInWithGoogle = createAsyncThunk<TypeUser | undefined, void>(
   "user/signInWithGoogle",

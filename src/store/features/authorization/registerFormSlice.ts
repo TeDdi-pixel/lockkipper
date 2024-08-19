@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { TypeRegistration } from "../../widgets/forms/startPageForms/types/types";
-import { TypeRegisterForm } from "../types/types";
+import { TypeRegistration } from "../../../widgets/forms/startPageForms/types/types";
+import { TypeRegisterForm } from "../../types/types";
 
 const initialState: TypeRegisterForm = {
   formData: null,

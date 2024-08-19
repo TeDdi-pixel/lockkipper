@@ -1,5 +1,5 @@
 import { Dispatch } from "@reduxjs/toolkit";
-import { setPasswordSafeness } from "../store/slices/registerFormSlice";
+import { setPasswordSafeness } from "../store/features/authorization/registerFormSlice";
 
 export const getPasswordStrength = (
   score: number,

@@ -19,10 +19,10 @@ import {
 } from "@mui/material";
 import AlternativeEntryLine from "../../../entities/forms/getEmailForm/AlternativeEntryLine";
 import zxcvbn from "zxcvbn";
-import { showError } from "../../../helpers/notify";
 import { createAccount } from "../../../store/asyncThunks/createAccount";
 import { ThunkDispatch } from "redux-thunk";
 import { getPasswordStrength } from "../../../helpers/getPasswordStrangth";
+import { showError } from "../../../helpers/toastify/error";
 
 const styles = {
   fontFamily: "Montserrat",

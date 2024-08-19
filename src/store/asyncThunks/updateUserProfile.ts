@@ -1,11 +1,12 @@
 import { updateEmail, updateProfile } from "firebase/auth";
 
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { auth, db } from "../../services/firebase-config";
-import { notify, showError } from "../../helpers/notify";
+import { auth, db } from "../../lib/firebase/config";
 import { RootState, TypeMyAccountForm } from "../types/types";
 import { doc, updateDoc } from "firebase/firestore";
-import { setDisplayName, setUserEmail } from "../slices/userSlice";
+import { setDisplayName, setUserEmail } from "../features/user/userSlice";
+import { showError } from "../../helpers/toastify/error";
+import { notify } from "../../helpers/toastify/notify";
 
 export const updateUserProfile = createAsyncThunk(
   "user/updateUserProfile",
@@ -40,7 +41,6 @@ export const updateUserProfile = createAsyncThunk(
         dispatch(setUserEmail(userData.newEmail));
         notify("Email has been successfully changed!");
       }
-      
     } catch (error) {
       console.error(error);
       if (error instanceof Error) {

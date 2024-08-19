@@ -1,12 +1,12 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { TypeUser, TypeUserSlice } from "../types/types";
+import { TypeUser, TypeUserSlice } from "../../types/types";
 import Cookies from "js-cookie";
-import { signInWithGoogle } from "../asyncThunks/signInWithGoogle";
-import { createAccount } from "../asyncThunks/createAccount";
-import { signInWithPassword } from "../asyncThunks/signInWithPassword";
-import { updateUserPhoto } from "../asyncThunks/updateUserPhoto";
-import { notify } from "../../helpers/notify";
-import { setUserCookies } from "../../helpers/cookiesActions";
+import { signInWithGoogle } from "../../asyncThunks/signInWithGoogle";
+import { createAccount } from "../../asyncThunks/createAccount";
+import { signInWithPassword } from "../../asyncThunks/signInWithPassword";
+import { updateUserPhoto } from "../../asyncThunks/updateUserPhoto";
+import { setUserCookies } from "../../../helpers/cookiesActions";
+import { notify } from "../../../helpers/toastify/notify";
 
 const userCookie = Cookies.get("user");
 

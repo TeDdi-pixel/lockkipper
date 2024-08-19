@@ -5,7 +5,7 @@ import {
   setProfilePhoto,
   setUser,
   setUserLoggedIn,
-} from "../../../store/slices/userSlice";
+} from "../../../store/features/user/userSlice";
 
 const logOut = (dispatch: Dispatch) => {
   Cookies.remove("user");

@@ -2,10 +2,8 @@ import { Box, Button } from "@mui/material";
 import CustomTypography from "../../../shared/ui/CustomTypography";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import {
-  setEmail,
-  setEmailEntered,
-} from "../../../store/slices/loginFormSlice";
+import { setEmail, setEmailEntered } from "../../../store/features/authorization/loginFormSlice";
+
 
 type AlternativeEntryLine = {
   buttonText: string;

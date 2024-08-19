@@ -11,11 +11,11 @@ import CustomTypography from "../../../shared/ui/CustomTypography";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setPassword } from "../../../store/slices/loginFormSlice";
 import { signInWithPassword } from "../../../store/asyncThunks/signInWithPassword";
 import { ThunkDispatch } from "redux-thunk";
 import AlternativeEntryLine from "../../../entities/forms/getEmailForm/AlternativeEntryLine";
 import { RootState } from "../../../store/types/types";
+import { setPassword } from "../../../store/features/authorization/loginFormSlice";
 
 const styles = {
   fontFamily: "Montserrat",

@@ -1,8 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../services/firebase-config";
-import { showError } from "../../helpers/notify";
-import { setUser } from "../slices/userSlice";
+import { auth } from "../../lib/firebase/config";
+import { setUser } from "../features/user/userSlice";
+import { showError } from "../../helpers/toastify/error";
 
 type TypeFormData = {
   email: string;

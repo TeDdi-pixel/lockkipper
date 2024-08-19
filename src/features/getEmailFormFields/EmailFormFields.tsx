@@ -2,14 +2,11 @@ import { Checkbox, FormControlLabel } from "@mui/material";
 import CustomTextField from "../../shared/ui/CustomTextField";
 import CustomTypography from "../../shared/ui/CustomTypography";
 import { useEffect, useState } from "react";
-import {
-  rememberEmail,
-  setEmailEntered,
-} from "../../store/slices/loginFormSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/types/types";
 import Cookies from "js-cookie";
 import { FieldValues, UseFormRegister, UseFormSetValue } from "react-hook-form";
+import { rememberEmail, setEmailEntered } from "../../store/features/authorization/loginFormSlice";
 
 const EmailFormFields = ({
   register,
