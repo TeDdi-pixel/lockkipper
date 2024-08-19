@@ -3,11 +3,14 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../services/firebase-config";
 import { showError } from "../../helpers/notify";
 import { setUser } from "../slices/userSlice";
-import { TypeLoginForm } from "../types/types";
 
+type TypeFormData = {
+  email: string;
+  password: string;
+};
 export const signInWithPassword = createAsyncThunk(
   "user/signInWithPassword",
-  async (formData: TypeLoginForm, { dispatch }) => {
+  async (formData: TypeFormData, { dispatch }) => {
     const { email, password } = formData;
 
     if (!email || !password) {
@@ -15,10 +18,12 @@ export const signInWithPassword = createAsyncThunk(
     }
 
     try {
-      //Adding user to Firestore Authentication database
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      const fullUser = userCredential.user;
-      //Getting only useful data
+      const { user: fullUser } = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
       const user = {
         uid: fullUser.uid,
         email: fullUser.email,

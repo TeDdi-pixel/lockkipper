@@ -4,32 +4,38 @@ import { auth, db, googleProvider } from "../../services/firebase-config";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { showError } from "../../helpers/notify";
 import { setUser } from "../slices/userSlice";
+import { TypeUser } from "../types/types";
 
-export const signInWithGoogle = createAsyncThunk(
+export const signInWithGoogle = createAsyncThunk<TypeUser | undefined, void>(
   "user/signInWithGoogle",
   async (_, { dispatch }) => {
     try {
       //Getting user from Firestore Authentication database
-      const userCredential = await signInWithPopup(auth, googleProvider);
-      const fullUser = userCredential.user;
+      const { user: fullUser } = await signInWithPopup(auth, googleProvider);
 
-      const user = {
+      const user: TypeUser = {
         uid: fullUser.uid,
         email: fullUser.email,
         displayName: fullUser.displayName,
         photoURL: fullUser.photoURL,
       };
-      //Transfer the user to users collection in Firestore Database
+
+      //Getting user from users collection
       const docRef = doc(db, "users", user.uid);
       const docSnap = await getDoc(docRef);
-      if (!docSnap.exists()) await setDoc(docRef, user);
 
-      dispatch(setUser(user));
+      if (!docSnap.exists()) {
+        await setDoc(docRef, user);
+        dispatch(setUser(user));
+        return user;
+      }
 
-      return user;
+      const firebaseUser = docSnap.data() as TypeUser;
+      dispatch(setUser(firebaseUser));
+      return firebaseUser;
     } catch (error) {
       console.log("Error signing in with Google: ", error);
-      showError(`${error}`);
+      showError(`Error signing in with Google: ${error}`);
       return undefined;
     }
   }

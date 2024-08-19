@@ -10,11 +10,12 @@ import {
 import CustomTypography from "../../../shared/ui/CustomTypography";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setPassword } from "../../../store/slices/loginFormSlice";
 import { signInWithPassword } from "../../../store/asyncThunks/signInWithPassword";
 import { ThunkDispatch } from "redux-thunk";
 import AlternativeEntryLine from "../../../entities/forms/getEmailForm/AlternativeEntryLine";
+import { RootState } from "../../../store/types/types";
 
 const styles = {
   fontFamily: "Montserrat",
@@ -27,6 +28,7 @@ const GetPasswordForm = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
   const handleShowPassword = () => setShowPassword((show) => !show);
+  const { email } = useSelector((state: RootState) => state.loginForm);
   const handleMouseDownPassword = (
     event: React.MouseEvent<HTMLButtonElement>
   ) => {
@@ -34,8 +36,9 @@ const GetPasswordForm = () => {
   };
   const { handleSubmit, register } = useForm<{ password: string }>();
   const onSubmit: SubmitHandler<{ password: string }> = async (data) => {
-    if (data) dispatch(setPassword(data.password));
-    dispatch(signInWithPassword());
+    if (data.password) dispatch(setPassword(data.password));
+    if (email)
+      dispatch(signInWithPassword({ email: email, password: data.password }));
   };
 
   return (

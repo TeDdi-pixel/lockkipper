@@ -6,7 +6,7 @@ import {
   setProfilePhoto,
   setUser,
   setUserLoggedIn,
-} from "../../store/slices/userSlice";
+} from "../../../store/slices/userSlice";
 import { Dispatch } from "@reduxjs/toolkit";
 export const optionList = [
   {

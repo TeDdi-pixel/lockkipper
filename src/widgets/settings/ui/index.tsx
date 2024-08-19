@@ -1,8 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
-import ProfileImage from "../../shared/ui/ProfileImage";
-import { accountOptions, optionList } from "../../widgets/settings/config/config";
-import { RootState } from "../../store/types/types";
+import ProfileImage from "../../../shared/ui/ProfileImage";
+import { RootState } from "../../../store/types/types";
+import { actionOptions } from "../config/actionOptions";
 import { Link } from "react-router-dom";
+import { pageOptions } from "../config/pageOptions";
 
 const Settings = ({ status }: { status: boolean }) => {
   const { user } = useSelector((state: RootState) => state.user);
@@ -23,7 +24,7 @@ const Settings = ({ status }: { status: boolean }) => {
         )}
       </div>
       <div className="header__settings-option-list">
-        {optionList.map((option) => (
+        {pageOptions.map((option) => (
           <div className="header__settings-option" key={option.id}>
             {option.icon}
             <Link
@@ -39,11 +40,11 @@ const Settings = ({ status }: { status: boolean }) => {
         className="header__settings-option-list"
         style={{ borderBottom: "none" }}
       >
-        {accountOptions.map((option) => (
+        {actionOptions.map((option) => (
           <button
             className="header__settings-option"
             key={option.id}
-            onClick={() => option.func && option.func(dispatch)}
+            onClick={() => option.func?.(dispatch)}
           >
             {option.icon}
             <div className="header__settings-option-text">{option.text}</div>

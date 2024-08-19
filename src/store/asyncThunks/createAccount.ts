@@ -8,31 +8,30 @@ import { TypeRegistration } from "../../widgets/forms/startPageForms/types/types
 export const createAccount = createAsyncThunk(
   "user/createAccount",
   async (data: TypeRegistration) => {
-    const { email, password } = data;
-    
+    const { email, password, displayName, hint } = data;
+
+    if (!email || !password) {
+      throw new Error("Email and password are required.");
+    }
+
     try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-
-      if (!email || !password) {
-        throw new Error("Email and password are required.");
-      }
-
-      const fullUser = userCredential.user;
+      const { user: fullUser } = await createUserWithEmailAndPassword(auth, email, password);
 
       const user = {
         uid: fullUser.uid,
-        email: data.email,
-        hint: data.hint,
-        displayName: data.displayName,
+        email: email,
+        hint: hint,
+        displayName: displayName,
         photoURL: fullUser.photoURL,
       };
-      const docRef = doc(db, "users", fullUser.uid);
+
+      const docRef = doc(db, "users", user.uid);
       await setDoc(docRef, user);
 
       return user;
     } catch (error) {
       console.log("Error with creating user: ", error);
-      showError(`${error}`);
+      showError(`Error creating a user: ${error}`);
       return undefined;
     }
   }
