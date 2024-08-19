@@ -1,6 +1,6 @@
 import DefaultLayout from "../../layout/defaultLayout/DefaultLayout";
 import ContentTable from "../../widgets/contentTable/ContentTable";
-import Filters from "../../widgets/filters/Filters";
+import { Filters } from "../../widgets/filters";
 
 const VaultPage = () => {
   return (
