@@ -10,8 +10,8 @@
     &__row {
       border-bottom: 2px solid #ced4dc;
       &-cell {
-        @include default-font(14px, #666666, 600);
         padding: 10.5px;
+        @include default-font(14px, #666666, 600);
 
         &:first-child {
           min-width: 84px;
@@ -36,10 +36,10 @@
   &-body {
     &__row {
         height: 30px;
+        border-top: 1px solid #ced4dc;
       &:first-child {
         border-top: none;
       }
-      border-top: 1px solid #ced4dc;
       &-cell {
         padding: 10.5px;
         &:nth-child(1) {
@@ -48,9 +48,9 @@
           justify-content: space-between;
         }
         &-icon {
-          @include default-font(23px, #666666);
           max-height: 23px;
           height: 23px;
+          @include default-font(23px, #666666);
         }
         &:last-child {
           color: #666666;
@@ -70,10 +70,10 @@
             }
           }
           &__owner {
-            @include default-font(10.5px, #666666, 600);
             background-color: rgb(255, 163, 163);
             padding: 1.75px 5.25px;
             border-radius: 0.25rem;
+            @include default-font(10.5px, #666666, 600);
           }
           &__options {
             display: flex;

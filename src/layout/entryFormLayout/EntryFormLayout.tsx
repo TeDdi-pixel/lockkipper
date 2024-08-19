@@ -15,7 +15,7 @@ const EntryFormLayout = ({
   const { userLoggedIn } = useSelector((state: RootState) => state.user);
 
   useEffect(() => {
-    if (userLoggedIn) navigate("/vault");
+    if (userLoggedIn) navigate("/vaults/my_vault");
   }, [userLoggedIn]);
 
   return (

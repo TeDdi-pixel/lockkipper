@@ -4,11 +4,13 @@
   $flex-direction: row,
   $flex-wrap: nowrap
 ) {
-  display: flex;
-  flex-wrap: #{$flex-wrap};
-  justify-content: #{$justify-content};
-  align-items: #{$align-items};
-  flex-direction: #{$flex-direction};
+  & {
+    display: flex;
+    flex-wrap: #{$flex-wrap};
+    justify-content: #{$justify-content};
+    align-items: #{$align-items};
+    flex-direction: #{$flex-direction};
+  }
 }
 @mixin transition($time: 0.2s, $time-function: ease, $target: all) {
   transition: #{$target} #{$time-function} #{$time};
@@ -17,8 +19,8 @@
 $maxWidth: 1920;
 
 @mixin adaptive-font($pcSize, $mobSize) {
-  $addSize: $pcSize - $mobSize;
-  $addMobSize: $addSize + $addSize * 0.7;
+    $addSize: $pcSize - $mobSize;
+    $addMobSize: $addSize + $addSize * 0.7;
 
   @media (max-width: 767px) {
     font-size: calc(
@@ -38,11 +40,13 @@ $maxWidth: 1920;
   $textAlign: left,
   $lineHeight: 124.182%
 ) {
-  color: #{$color};
-  text-align: #{$textAlign};
-  font-family: Montserrat, sans-serif;
-  font-size: #{$fontSize};
-  font-style: normal;
-  font-weight: #{$fontWeight};
-  line-height: #{$lineHeight};
+  & {
+    color: #{$color};
+    text-align: #{$textAlign};
+    font-family: Montserrat, sans-serif;
+    font-size: #{$fontSize};
+    font-style: normal;
+    font-weight: #{$fontWeight};
+    line-height: #{$lineHeight};
+  }
 }

@@ -1,7 +1,6 @@
 import MainTitle from "../../shared/ui/MainTitle";
 import ProfileImage from "../../shared/ui/ProfileImage";
 import Settings from "../../entities/header/Settings";
-// import { CiLock } from "react-icons/ci";
 import { useState } from "react";
 
 const Header = ({ title }: { title: string }) => {
@@ -11,12 +10,10 @@ const Header = ({ title }: { title: string }) => {
     setActive(!active);
   };
   return (
-    <header className="header">
+    <header className="flex justify-between mb-[30.5px] items-center relative ml-[230px]">
       <MainTitle title={title} />
       <div className="header__wrapper-right">
-        {/* <button className="header__lock">
-          <CiLock />
-        </button> */}
+
         <button onClick={handleSettings}>
           <ProfileImage width="45px"/>
         </button>

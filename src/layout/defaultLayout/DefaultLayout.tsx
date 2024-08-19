@@ -3,8 +3,8 @@ import Header from "../../widgets/header/Header";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/types/types";
-import Menu from "../../widgets/menu/Menu";
 import { ToastContainer } from "react-toastify";
+import { Menu } from "../../widgets/menu";
 type TypeProps = {
   children: ReactNode;
   title: string;
@@ -17,7 +17,7 @@ const DefaultLayout = ({ children, title }: TypeProps) => {
 
   useEffect(() => {
     if (userLoggedIn && location.pathname === "/") {
-      navigate("/vault");
+      navigate("/vaults/my_vault");
     } else if (!userLoggedIn && location.pathname !== "/") {
       navigate("/");
     }
@@ -32,7 +32,7 @@ const DefaultLayout = ({ children, title }: TypeProps) => {
       <div className="content__wrapper">
         <Header title={title} />
 
-        <main className="main">{children}</main>
+        <main className="flex ml-[230px]">{children}</main>
       </div>
     </div>
   );

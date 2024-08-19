@@ -2,45 +2,35 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { signInWithPopup } from "firebase/auth";
 import { auth, db, googleProvider } from "../../services/firebase-config";
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import { TypeUser } from "../types/types";
-import Cookies from "js-cookie";
 import { showError } from "../../helpers/notify";
+import { setUser } from "../slices/userSlice";
 
 export const signInWithGoogle = createAsyncThunk(
   "user/signInWithGoogle",
-  async () => {
+  async (_, { dispatch }) => {
     try {
+      //Getting user from Firestore Authentication database
       const userCredential = await signInWithPopup(auth, googleProvider);
-      const user = userCredential.user;
-      if (!user) return;
+      const fullUser = userCredential.user;
 
+      const user = {
+        uid: fullUser.uid,
+        email: fullUser.email,
+        displayName: fullUser.displayName,
+        photoURL: fullUser.photoURL,
+      };
+      //Transfer the user to users collection in Firestore Database
       const docRef = doc(db, "users", user.uid);
       const docSnap = await getDoc(docRef);
+      if (!docSnap.exists()) await setDoc(docRef, user);
 
-      let firebaseUser;
+      dispatch(setUser(user));
 
-      if (!docSnap.exists()) {
-        await setDoc(docRef, {
-          uid: user.uid,
-          email: user.email,
-          displayName: user.displayName,
-          photoURL: user.photoURL,
-          hint: null,
-          password: null,
-        });
-      } else {
-        firebaseUser = docSnap.data() as TypeUser;
-
-        if (firebaseUser.photoURL) {
-          Cookies.set("user", JSON.stringify(firebaseUser));
-        }
-      }
-
-      return firebaseUser;
+      return user;
     } catch (error) {
-      console.log("Error signing in with Google:", error);
+      console.log("Error signing in with Google: ", error);
       showError(`${error}`);
-      return null;
+      return undefined;
     }
   }
 );

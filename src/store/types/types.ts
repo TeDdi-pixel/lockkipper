@@ -23,14 +23,14 @@ export type TypeUser = {
   uid: string;
   photoURL: string | null;
   email: string | null;
-  hint: string | null;
+  hint?: string | null;
   displayName: string | null;
-  password: string | null;
+  password?: string | null;
 };
 
 export type TypeUserSlice = {
   user: TypeUser | null;
-  profilePhoto: string | null;
+  profilePhoto?: string | null;
   userLoggedIn: boolean;
 };
 

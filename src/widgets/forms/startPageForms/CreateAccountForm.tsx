@@ -17,12 +17,12 @@ import {
   InputLabel,
   OutlinedInput,
 } from "@mui/material";
-import { setPasswordSafeness } from "../../../store/slices/registerFormSlice";
 import AlternativeEntryLine from "../../../entities/forms/getEmailForm/AlternativeEntryLine";
 import zxcvbn from "zxcvbn";
 import { showError } from "../../../helpers/notify";
 import { createAccount } from "../../../store/asyncThunks/createAccount";
 import { ThunkDispatch } from "redux-thunk";
+import { getPasswordStrength } from "../../../helpers/getPasswordStrangth";
 
 const styles = {
   fontFamily: "Montserrat",
@@ -76,34 +76,7 @@ const CreateAccountForm = () => {
     }
   };
   useEffect(() => {
-    const getPasswordStrength = (score: number) => {
-      switch (score) {
-        case 0:
-          dispatch(setPasswordSafeness(10));
-          setProgressColor("danger");
-          break;
-        case 1:
-          dispatch(setPasswordSafeness(25));
-          setProgressColor("danger");
-          break;
-        case 2:
-          dispatch(setPasswordSafeness(50));
-          setProgressColor("warning");
-          break;
-        case 3:
-          dispatch(setPasswordSafeness(70));
-          setProgressColor("success");
-          break;
-        case 4:
-          dispatch(setPasswordSafeness(100));
-          setProgressColor("success");
-          break;
-        default:
-          return 0;
-      }
-    };
-
-    getPasswordStrength(score);
+    getPasswordStrength(score, dispatch, setProgressColor);
   }, [score, dispatch]);
 
   const onSubmit: SubmitHandler<TypeRegistration> = async (

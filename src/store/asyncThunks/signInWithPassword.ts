@@ -1,43 +1,38 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth, db } from "../../services/firebase-config";
-import { doc, getDoc } from "firebase/firestore";
-import { RootState, TypeUser } from "../types/types";
+import { auth } from "../../services/firebase-config";
 import { showError } from "../../helpers/notify";
+import { setUser } from "../slices/userSlice";
+import { TypeLoginForm } from "../types/types";
 
 export const signInWithPassword = createAsyncThunk(
   "user/signInWithPassword",
-  async (_, { getState }) => {
-    const loginFormSlice = getState() as RootState;
-    const loginForm = loginFormSlice.loginForm;
+  async (formData: TypeLoginForm, { dispatch }) => {
+    const { email, password } = formData;
 
-    if (!loginForm.email || !loginForm.password) return;
+    if (!email || !password) {
+      throw new Error("Email and password are required.");
+    }
 
     try {
-      if (loginForm.password === null) return;
-      showError('Your password is not right')
-      const userCredential = await signInWithEmailAndPassword(
-        auth,
-        loginForm.email,
-        loginForm.password
-      );
+      //Adding user to Firestore Authentication database
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const fullUser = userCredential.user;
+      //Getting only useful data
+      const user = {
+        uid: fullUser.uid,
+        email: fullUser.email,
+        displayName: fullUser.displayName,
+        photoURL: fullUser.photoURL,
+      };
 
-      const user = userCredential.user;
+      dispatch(setUser(user));
 
-      if (!user) return;
-
-      const docRef = doc(db, "users", user.uid);
-      const docSnap = await getDoc(docRef);
-
-      if (!docSnap.data()) return;
-
-      const firebaseUser = docSnap.data() as TypeUser;
-
-      return firebaseUser;
+      return user;
     } catch (error) {
-      console.log("Error signing in with Google:", error);
+      console.log("Error signing in with email and password: ", error);
       showError(`${error}`);
-      return null;
+      return undefined;
     }
   }
 );

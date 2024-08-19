@@ -6,6 +6,7 @@ import { createAccount } from "../asyncThunks/createAccount";
 import { signInWithPassword } from "../asyncThunks/signInWithPassword";
 import { updateUserPhoto } from "../asyncThunks/updateUserPhoto";
 import { notify } from "../../helpers/notify";
+import { setUserCookies } from "../../helpers/cookiesActions";
 
 const userCookie = Cookies.get("user");
 
@@ -14,7 +15,7 @@ const updateUserState = (state: TypeUserSlice, user: TypeUser | null) => {
     state.user = user;
     state.userLoggedIn = true;
     state.profilePhoto = user.photoURL ?? null;
-    Cookies.set("user", JSON.stringify(state.user));
+    setUserCookies(user);
   }
 };
 
@@ -27,35 +28,41 @@ export const userSlice = createSlice({
   },
   reducers: {
     setUser: (state, action: PayloadAction<TypeUser | null>) => {
-      updateUserState(state, action.payload);
+      state.user && updateUserState(state, action.payload);
     },
     setProfilePhoto: (state, action: PayloadAction<string | null>) => {
       state.profilePhoto = action.payload;
       if (state.user) {
         state.user.photoURL = action.payload;
-        Cookies.set("user", JSON.stringify(state.user));
+        setUserCookies(state.user);
       }
     },
     setUserLoggedIn: (state, action: PayloadAction<boolean>) => {
       state.userLoggedIn = action.payload;
     },
     setUserEmail: (state, action: PayloadAction<string>) => {
-      state.user.email = action.payload;
-      Cookies.set("user", JSON.stringify(state.user));
+      if (state.user) {
+        state.user.email = action.payload;
+        setUserCookies(state.user);
+      }
     },
     setDisplayName: (state, action: PayloadAction<string>) => {
-      state.user.displayName = action.payload;
-      Cookies.set("user", JSON.stringify(state.user));
+      if (state.user) {
+        state.user.displayName = action.payload;
+        setUserCookies(state.user);
+      }
     },
   },
   extraReducers: (builder) => {
     builder
+      //signInWithGoogle
       .addCase(signInWithGoogle.pending, (state) => {
         state.userLoggedIn = false;
       })
       .addCase(signInWithGoogle.fulfilled, (state, action) => {
         if (action.payload) updateUserState(state, action.payload);
       })
+      //createAccount
       .addCase(createAccount.pending, (state) => {
         state.userLoggedIn = false;
       })
@@ -65,6 +72,7 @@ export const userSlice = createSlice({
       .addCase(createAccount.rejected, (state) => {
         updateUserState(state, null);
       })
+      //signInWithPassword
       .addCase(signInWithPassword.pending, (state) => {
         state.userLoggedIn = false;
       })
@@ -74,6 +82,7 @@ export const userSlice = createSlice({
       .addCase(signInWithPassword.rejected, (state) => {
         updateUserState(state, null);
       })
+      //updateUserPhoto
       .addCase(updateUserPhoto.fulfilled, (state, action) => {
         state.profilePhoto = action.payload;
         if (state.user) {
