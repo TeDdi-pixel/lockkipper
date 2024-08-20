@@ -13,16 +13,16 @@ export const getPasswordStrength = (
     case 0:
     case 1:
       dispatch(setPasswordSafeness(10));
-      setProgressColor("danger"); // измените на допустимое значение
+      setProgressColor("danger");
       break;
     case 2:
       dispatch(setPasswordSafeness(50));
-      setProgressColor("warning"); // измените на допустимое значение
+      setProgressColor("warning");
       break;
     case 3:
     case 4:
       dispatch(setPasswordSafeness(100));
-      setProgressColor("success"); // измените на допустимое значение
+      setProgressColor("success");
       break;
     default:
       break;
