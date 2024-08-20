@@ -1,12 +1,12 @@
-import { Table } from "../../features/table";
 import DefaultLayout from "../../layout/defaultLayout/DefaultLayout";
+import { ContentTable } from "../../widgets/contentTable";
 import { Filters } from "../../widgets/filters";
 
 const VaultPage = () => {
   return (
     <DefaultLayout title="All vaults">
       <Filters />
-      <Table/>
+      <ContentTable />
     </DefaultLayout>
   );
 };

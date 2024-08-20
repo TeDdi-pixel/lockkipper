@@ -1,6 +1,6 @@
 import { Checkbox } from "@mui/material";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { TypeCellsData } from "../../widgets/contentTable/config/config";
+import { TypeCellsData } from "../../../widgets/contentTable/config/config";
 
 type TypeProps = {
   data: TypeCellsData[];

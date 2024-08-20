@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { TypeLoginForm } from "../types/types";
+import { TypeLoginForm } from "../../types/types";
 
 const initialState: TypeLoginForm = {
   email: null,
