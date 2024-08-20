@@ -105,12 +105,14 @@ const CreateAccountForm = () => {
         <TextField
           label="Email"
           type="email"
+          size="small"
           {...register('email')}
           required={true}
         />
         <TextField
           label="Account name"
           type="Text"
+          size="small"
           {...register('displayName')}
           required={true}
         />
@@ -193,6 +195,7 @@ const CreateAccountForm = () => {
         <TextField
           label="Master password hint"
           type="text"
+          size="small"
           {...register('hint')}
         />
         <Button type="submit" variant="contained" sx={styles}>
