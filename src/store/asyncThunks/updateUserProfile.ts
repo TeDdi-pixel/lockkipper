@@ -1,58 +1,42 @@
-import { updateEmail, updateProfile } from "firebase/auth";
-
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { auth, db } from "../../lib/firebase/config";
+import { db } from "../../lib/firebase/config";
 import { RootState, TypeMyAccountForm } from "../types/types";
-import { doc, updateDoc } from "firebase/firestore";
+import { doc } from "firebase/firestore";
 import { setDisplayName, setUserEmail } from "../features/user/userSlice";
 import { showError } from "../../helpers/toastify/error";
 import { notify } from "../../helpers/toastify/notify";
+import { updateUserName } from "../../shared/api/firebase/user/updateUserName";
+import { updateUserEmail } from "../../shared/api/firebase/user/updateUserEmail";
 
 export const updateUserProfile = createAsyncThunk(
   "user/updateUserProfile",
-  async (userData: TypeMyAccountForm, { getState, dispatch }) => {
+  async (
+    { newDisplayName, newEmail }: TypeMyAccountForm,
+    { getState, dispatch }
+  ) => {
     const userSlice = getState() as RootState;
-    const user = userSlice.user.user;
+    const { user } = userSlice.user;
 
-    if (!user) return;
+    if (!user) throw new Error("No user found. Please re-enter your account.");
+    const { uid, displayName, email } = user;
+    const docRef = doc(db, "users", uid);
 
-    const docRef = doc(db, "users", user.uid);
     try {
-      if (!auth.currentUser) {
-        showError("No user is currently signed in. Re-enter your account");
-        throw new Error("No user is currently signed in.");
-      }
-
-      if (
-        userData.newDisplayName &&
-        userData.newDisplayName !== user.displayName
-      ) {
-        await updateProfile(auth.currentUser, {
-          displayName: userData.newDisplayName,
-        });
-        await updateDoc(docRef, { displayName: userData.newDisplayName });
-        dispatch(setDisplayName(userData.newDisplayName));
+      if (newDisplayName && newDisplayName !== displayName) {
+        await updateUserName(docRef, newDisplayName);
+        dispatch(setDisplayName(newDisplayName));
         notify("User name has been successfully changed!");
       }
 
-      if (userData.newEmail && userData.newEmail !== user.email) {
-        await updateEmail(auth.currentUser, userData.newEmail);
-        await updateDoc(docRef, { email: userData.newEmail });
-        dispatch(setUserEmail(userData.newEmail));
+      if (newEmail && newEmail !== email) {
+        await updateUserEmail(docRef, newEmail);
+        dispatch(setUserEmail(newEmail));
         notify("Email has been successfully changed!");
       }
     } catch (error) {
-      console.error(error);
-      if (error instanceof Error) {
-        if (error.message === "No user is currently signed in.") {
-          showError("Email:  No user found. Please re-enter into your account");
-        } else {
-          showError(error.message);
-        }
-      } else {
-        showError("An unknown error occurred");
-      }
-      return null;
+      console.log(error);
+      showError(`${error}`);
+      return undefined;
     }
   }
 );

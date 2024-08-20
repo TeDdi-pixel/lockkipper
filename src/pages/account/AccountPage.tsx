@@ -1,5 +1,5 @@
 import DefaultLayout from "../../layout/defaultLayout/DefaultLayout";
-import AccountForm from "../../widgets/forms/accountForms/AccountForm";
+import { AccountForm } from "../../widgets/forms/accountForms";
 
 const AccountPage = () => {
   return (

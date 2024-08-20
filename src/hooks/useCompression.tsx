@@ -20,6 +20,7 @@ const useCompression = () => {
           const ctx = canvas.getContext("2d");
 
           if (ctx) {
+            ctx.filter = "blur(1px)";
             ctx.drawImage(img, 0, 0);
             const webpBase64 = canvas.toDataURL("image/webp");
             resolve(webpBase64);
@@ -37,7 +38,9 @@ const useCompression = () => {
     });
   };
 
-  const compressAndConvertToWebp = async (file: File): Promise<string | undefined> => {
+  const compressAndConvertToWebp = async (
+    file: File
+  ): Promise<string | undefined> => {
     const options = {
       maxSizeMB: 1,
       maxWidthOrHeight: 1920,

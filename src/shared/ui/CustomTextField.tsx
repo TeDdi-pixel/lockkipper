@@ -44,6 +44,7 @@ const CustomTextField = ({
       InputLabelProps={{
         sx: inputStyles,
       }}
+      inputProps={{ maxLength: 32 }}
       value={value}
       {...register(registerKey)}
       onChange={onChange}

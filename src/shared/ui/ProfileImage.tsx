@@ -2,21 +2,21 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store/types/types";
 import { PiUserCircleDuotone } from "react-icons/pi";
 
-const ProfileImage = ({ width }: { width: string }) => {
+const ProfileImage = ({ width, height }: { width: string; height: string }) => {
   const { profilePhoto } = useSelector((state: RootState) => state.user);
 
-  return profilePhoto ? (
-    <img
-      style={{ width: width, height: width }}
-      className="object-cover rounded-full"
-      src={profilePhoto}
-      alt="profile_photo"
-    />
-  ) : (
-    <PiUserCircleDuotone
-      style={{ width: width, height: width }}
-      className="object-cover rounded-full"
-    />
+  return (
+    <div className={`rounded-full overflow-hidden ${width} ${height} flex-shrink-0 aspect-square`}>
+      {profilePhoto ? (
+        <img
+          className="object-cover w-full h-full"
+          src={profilePhoto}
+          alt="profile_photo"
+        />
+      ) : (
+        <PiUserCircleDuotone className="object-cover w-full h-full" />
+      )}
+    </div>
   );
 };
 

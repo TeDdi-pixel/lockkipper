@@ -1,4 +1,7 @@
 import { TypeRegistration } from "../../widgets/forms/startPageForms/types/types";
+import store from "../store";
+
+export type AppDispatch = typeof store.dispatch;
 
 export type RootState = {
   loginForm: TypeLoginForm;

@@ -7,6 +7,7 @@ import { signInWithPassword } from "../../asyncThunks/signInWithPassword";
 import { updateUserPhoto } from "../../asyncThunks/updateUserPhoto";
 import { setUserCookies } from "../../../helpers/cookiesActions";
 import { notify } from "../../../helpers/toastify/notify";
+import { logOutUser } from "../../asyncThunks/logOutUser";
 
 const userCookie = Cookies.get("user");
 
@@ -87,12 +88,21 @@ export const userSlice = createSlice({
         state.profilePhoto = action.payload;
         if (state.user) {
           state.user.photoURL = action.payload;
-          Cookies.set("user", JSON.stringify(state.user));
+          setUserCookies(state.user);
           notify("User photo has been successfully changed!");
         }
       })
       .addCase(updateUserPhoto.rejected, (state) => {
         updateUserState(state, null);
+      })
+      //logOutUser
+      .addCase(logOutUser.fulfilled, (state, action) => {
+        if (action.payload) {
+          Cookies.remove("user");
+          state.userLoggedIn = false;
+          state.user = false;
+          state.profilePhoto = false;
+        }
       });
   },
 });

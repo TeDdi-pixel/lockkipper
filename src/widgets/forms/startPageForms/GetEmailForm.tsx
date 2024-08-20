@@ -27,13 +27,10 @@ const StartPageForm = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="form">
       <EmailFormFields register={register} setValue={setValue} />
-
       <Button type="submit" variant="contained">
         <CustomTypography text="Continue" />
       </Button>
-
       <CustomTypography text="or" textAlign="center" />
-
       <Button
         variant="outlined"
         endIcon={<GoogleIcon />}

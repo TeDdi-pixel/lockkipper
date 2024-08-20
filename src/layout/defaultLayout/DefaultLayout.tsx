@@ -12,13 +12,13 @@ type TypeProps = {
 
 const DefaultLayout = ({ children, title }: TypeProps) => {
   const navigate = useNavigate();
-  const location = useLocation();
+  const { pathname } = useLocation();
   const { userLoggedIn } = useSelector((state: RootState) => state.user);
 
   useEffect(() => {
-    if (userLoggedIn && location.pathname === "/") {
+    if (userLoggedIn && pathname === "/") {
       navigate("/vaults/my_vault");
-    } else if (!userLoggedIn && location.pathname !== "/") {
+    } else if (!userLoggedIn && pathname !== "/") {
       navigate("/");
     }
   }, [userLoggedIn]);
