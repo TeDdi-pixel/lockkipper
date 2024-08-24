@@ -1,4 +1,4 @@
-import { TypeRegistration } from "../../widgets/forms/startPageForms/types/types";
+import { TypeRegistration } from "../../features/forms/types/types";
 import store from "../store";
 
 export type AppDispatch = typeof store.dispatch;
@@ -7,6 +7,21 @@ export type RootState = {
   loginForm: TypeLoginForm;
   registerForm: TypeRegisterForm;
   user: TypeUserSlice;
+  auth: TypeAuthSlice;
+};
+
+export type TypeCurrentForm =
+  | "emailForm"
+  | "passwordForm"
+  | "createAccountForm";
+
+export type TypeAuthSlice = {
+  currentForm: TypeCurrentForm;
+  formData: TypeRegistration | null;
+  passwordSafeness: number;
+  email: string | null;
+  password: string | null;
+  emailIsRemembered: string | boolean;
 };
 
 export type TypeLoginForm = {
@@ -19,7 +34,6 @@ export type TypeLoginForm = {
 export type TypeRegisterForm = {
   formData: TypeRegistration | null;
   passwordSafeness: number;
-  goToCreateForm: boolean;
 };
 
 export type TypeUser = {

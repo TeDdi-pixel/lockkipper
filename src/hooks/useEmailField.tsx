@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/types/types";
-import {
-  rememberEmail,
-  setEmailEntered,
-} from "../store/features/authorization/loginFormSlice";
 import Cookies from "js-cookie";
+import { rememberEmail } from "../store/features/authorization/authSlice";
 
 const useEmailField = (setValue: (key: string, value: string) => void) => {
   const dispatch = useDispatch();
-  const { email, emailIsRemembered } = useSelector((state: RootState) => state.loginForm);
+  const { email, emailIsRemembered } = useSelector(
+    (state: RootState) => state.auth
+  );
   const [isChecked, setIsChecked] = useState<boolean>(!!emailIsRemembered);
   const [emailLabel, setEmailLabel] = useState<string | null>(email);
 
@@ -35,12 +34,8 @@ const useEmailField = (setValue: (key: string, value: string) => void) => {
       dispatch(rememberEmail(false));
     }
   }, [isChecked]);
-  //Changing from email to password form
-  useEffect(() => {
-    if (email) dispatch(setEmailEntered(true));
-  }, [email]);
 
-  return { handleEmailChange, handleCheckBox, emailLabel, isChecked};
+  return { handleEmailChange, handleCheckBox, emailLabel, isChecked };
 };
 
 export default useEmailField;

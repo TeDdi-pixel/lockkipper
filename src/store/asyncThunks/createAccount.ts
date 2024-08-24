@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../../lib/firebase/config";
 import { doc, setDoc } from "firebase/firestore";
-import { TypeRegistration } from "../../widgets/forms/startPageForms/types/types";
+import { TypeRegistration } from "../../features/forms/types/types";
 import { showError } from "../../helpers/toastify/error";
 
 export const createAccount = createAsyncThunk(

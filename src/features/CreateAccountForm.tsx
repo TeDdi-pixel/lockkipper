@@ -1,10 +1,10 @@
 import { SubmitHandler, useForm } from "react-hook-form";
-import { TypeRegistration } from "./types/types";
-import EntryFormLayout from "../../../layout/entryFormLayout/EntryFormLayout";
-import CustomTypography from "../../../shared/ui/CustomTypography";
+import { TypeRegistration } from "./forms/types/types";
+import EntryFormLayout from "../layout/entryFormLayout/EntryFormLayout";
+import CustomTypography from "../shared/ui/CustomTypography";
 import LinearProgress from "@mui/joy/LinearProgress";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../../store/types/types";
+import { AppDispatch, RootState } from "../store/types/types";
 import { ChangeEvent, useEffect, useState } from "react";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
@@ -19,12 +19,12 @@ import {
   TextField,
 } from "@mui/material";
 import zxcvbn from "zxcvbn";
-import { createAccount } from "../../../store/asyncThunks/createAccount";
-import { getPasswordStrength } from "../../../helpers/getPasswordStrangth";
-import { showError } from "../../../helpers/toastify/error";
+import { createAccount } from "../store/asyncThunks/createAccount";
+import { getPasswordStrength } from "../helpers/getPasswordStrangth";
+import { showError } from "../helpers/toastify/error";
 import { OverridableStringUnion } from "@mui/types";
 import { ColorPaletteProp } from "@mui/joy/styles/types";
-import { AlternativeEntrance } from "../../../entities/alternativeEntrance";
+import { AlternativeEntrance } from "../entities/alternativeEntrance";
 
 const styles = {
   fontFamily: "Montserrat",
@@ -49,9 +49,7 @@ const CreateAccountForm = () => {
   const [score, setScore] = useState<number>(0);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [showRePassword, setShowRePassword] = useState<boolean>(false);
-  const { passwordSafeness } = useSelector(
-    (state: RootState) => state.registerForm
-  );
+  const { passwordSafeness } = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch<AppDispatch>();
   const handleShowPassword = () => setShowPassword((show) => !show);
 
@@ -211,6 +209,7 @@ const CreateAccountForm = () => {
           labelText="Already registered?"
           buttonText="Sign in"
           direction={"/"}
+          currentForm="emailForm"
         />
       </form>
     </EntryFormLayout>

@@ -1,34 +1,37 @@
 import { Box, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import {
-  setEmail,
-  setEmailEntered,
-} from "../../../store/features/authorization/loginFormSlice";
 import CustomTypography from "../../../shared/ui/CustomTypography";
+import { TypeCurrentForm } from "../../../store/types/types";
+import {
+  setCurrentForm,
+  setEmail,
+} from "../../../store/features/authorization/authSlice";
 
 type AlternativeEntrance = {
   buttonText: string;
   labelText: string;
   direction: string;
+  currentForm: TypeCurrentForm;
 };
 
 export const AlternativeEntrance = ({
   buttonText,
   labelText,
   direction,
+  currentForm,
 }: AlternativeEntrance) => {
   const dispatch = useDispatch();
 
-  const resetEmailFormStates = () => {
-    dispatch(setEmailEntered(false));
+  const switchCurrentForm = () => {
     dispatch(setEmail(null));
+    dispatch(setCurrentForm(currentForm));
   };
 
   return (
     <Box display="flex" alignItems="center" justifyContent="center">
       <CustomTypography text={labelText} fontSize={"12px"} />
-      <Button variant="text" onClick={resetEmailFormStates}>
+      <Button variant="text" onClick={switchCurrentForm}>
         <Link to={direction} className="text-red">
           <CustomTypography
             text={buttonText}

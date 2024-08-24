@@ -7,15 +7,14 @@ import {
   InputLabel,
   OutlinedInput,
 } from "@mui/material";
-import CustomTypography from "../../../shared/ui/CustomTypography";
+import CustomTypography from "../shared/ui/CustomTypography";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { signInWithPassword } from "../../../store/asyncThunks/signInWithPassword";
+import { signInWithPassword } from "../store/asyncThunks/signInWithPassword";
 import { ThunkDispatch } from "redux-thunk";
-import { RootState } from "../../../store/types/types";
-import { setPassword } from "../../../store/features/authorization/loginFormSlice";
-import { AlternativeEntrance } from "../../../entities/alternativeEntrance";
+import { RootState } from "../store/types/types";
+import { AlternativeEntrance } from "../entities/alternativeEntrance";
 
 const styles = {
   fontFamily: "Montserrat",
@@ -28,7 +27,7 @@ const GetPasswordForm = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
   const handleShowPassword = () => setShowPassword((show) => !show);
-  const { email } = useSelector((state: RootState) => state.loginForm);
+  const { email } = useSelector((state: RootState) => state.auth);
   const handleMouseDownPassword = (
     event: React.MouseEvent<HTMLButtonElement>
   ) => {
@@ -36,7 +35,6 @@ const GetPasswordForm = () => {
   };
   const { handleSubmit, register } = useForm<{ password: string }>();
   const onSubmit: SubmitHandler<{ password: string }> = async (data) => {
-    if (data.password) dispatch(setPassword(data.password));
     if (email)
       dispatch(signInWithPassword({ email: email, password: data.password }));
   };
@@ -76,6 +74,7 @@ const GetPasswordForm = () => {
         labelText="Your first time here?"
         buttonText="Create an account"
         direction="/create_account_form"
+        currentForm="createAccountForm"
       />
     </form>
   );

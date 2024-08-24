@@ -1,16 +1,17 @@
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import {
-  rememberEmail,
-  setEmail,
-} from "../../../../../store/features/authorization/loginFormSlice";
-import { EmailFormField } from "../../../../../features/emailForm";
 import ContinueButton from "./ContinueButton";
 import GoogleEntrance from "./GoogleEntrance";
-import { AppDispatch } from "../../../../../store/types/types";
-import { AlternativeEntrance } from "../../../../../entities/alternativeEntrance";
+import { AppDispatch } from "../../../../store/types/types";
+import { AlternativeEntrance } from "../../../../entities/alternativeEntrance";
+import {
+  rememberEmail,
+  setCurrentForm,
+  setEmail,
+} from "../../../../store/features/authorization/authSlice";
+import { EmailFormField } from "../../../../entities/emailForm";
 
-export const StartPageForm = () => {
+export const EmailForm = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   const { register, handleSubmit, setValue } = useForm<FieldValues>({
@@ -20,6 +21,7 @@ export const StartPageForm = () => {
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(setEmail(data.email));
     if (data.emailIsRemembered) dispatch(rememberEmail(data.emailIsRemembered));
+    dispatch(setCurrentForm("passwordForm"));
   };
 
   return (
@@ -31,6 +33,7 @@ export const StartPageForm = () => {
         labelText="Your first time here?"
         buttonText="Create an account"
         direction="/create_account_form"
+        currentForm="createAccountForm"
       />
     </form>
   );

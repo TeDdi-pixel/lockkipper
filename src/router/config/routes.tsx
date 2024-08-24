@@ -1,5 +1,5 @@
 import { lazy } from "react";
-import CreateAccountForm from "../../widgets/forms/startPageForms/CreateAccountForm";
+import CreateAccountForm from "../../features/CreateAccountForm";
 import VaultPage from "../../pages/vault/VaultPage";
 import AccountPage from "../../pages/account/AccountPage";
 

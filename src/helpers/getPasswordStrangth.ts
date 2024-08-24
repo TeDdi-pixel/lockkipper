@@ -1,8 +1,8 @@
 import { Dispatch } from "@reduxjs/toolkit";
-import { setPasswordSafeness } from "../store/features/authorization/registerFormSlice";
 import { OverridableStringUnion } from "@mui/types";
 import { ColorPaletteProp } from "@mui/joy/styles/types";
 import { LinearProgressPropsColorOverrides } from "@mui/material";
+import { setPasswordSafeness } from "../store/features/authorization/authSlice";
 
 export const getPasswordStrength = (
   score: number,

@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import CustomTypography from "../../../../../shared/ui/CustomTypography";
+import CustomTypography from "../../../shared/ui/CustomTypography";
 
 const ContinueButton = () => {
   return (
