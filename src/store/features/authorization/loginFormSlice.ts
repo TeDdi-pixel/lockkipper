@@ -1,10 +1,14 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { TypeLoginForm } from "../../types/types";
+import Cookies from "js-cookie";
+import { setEmailCookies } from "../../../helpers/cookiesActions";
+
+const cookiesEmail = Cookies.get("email");
 
 const initialState: TypeLoginForm = {
   email: null,
-  emailEntered: false,
-  emailIsRemembered: false,
+  emailEntered: false, //flag for changing forms from email to password
+  emailIsRemembered: cookiesEmail ?? false,
   password: null,
 };
 
@@ -23,6 +27,7 @@ export const loginFormSlice = createSlice({
     },
     rememberEmail: (state, action: PayloadAction<boolean>) => {
       state.emailIsRemembered = action.payload;
+      if (state.email) setEmailCookies(state.email);
     },
   },
 });

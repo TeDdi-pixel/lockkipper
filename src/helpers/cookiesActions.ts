@@ -8,3 +8,11 @@ export const setUserCookies = (user: TypeUser) => {
     sameSite: "strict",
   });
 };
+
+export const setEmailCookies = (email: string) => {
+  Cookies.set("email", email, {
+    expires: 3,
+    secure: true,
+    sameSite: "strict",
+  });
+};

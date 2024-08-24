@@ -2,7 +2,7 @@ import { Typography, TypographyProps } from "@mui/material";
 import { ReactNode } from "react";
 
 type TypeProps = TypographyProps & {
-  text?: string | undefined;
+  text?: string;
   children?: ReactNode;
 };
 

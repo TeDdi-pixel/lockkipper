@@ -13,9 +13,9 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { signInWithPassword } from "../../../store/asyncThunks/signInWithPassword";
 import { ThunkDispatch } from "redux-thunk";
-import AlternativeEntryLine from "../../../entities/forms/getEmailForm/AlternativeEntryLine";
 import { RootState } from "../../../store/types/types";
 import { setPassword } from "../../../store/features/authorization/loginFormSlice";
+import { AlternativeEntrance } from "../../../entities/alternativeEntrance";
 
 const styles = {
   fontFamily: "Montserrat",
@@ -72,7 +72,7 @@ const GetPasswordForm = () => {
         <CustomTypography text="Log in with master password" />
       </Button>
 
-      <AlternativeEntryLine
+      <AlternativeEntrance
         labelText="Your first time here?"
         buttonText="Create an account"
         direction="/create_account_form"

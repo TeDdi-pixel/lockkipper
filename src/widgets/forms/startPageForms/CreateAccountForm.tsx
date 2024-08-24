@@ -18,13 +18,13 @@ import {
   OutlinedInput,
   TextField,
 } from "@mui/material";
-import AlternativeEntryLine from "../../../entities/forms/getEmailForm/AlternativeEntryLine";
 import zxcvbn from "zxcvbn";
 import { createAccount } from "../../../store/asyncThunks/createAccount";
 import { getPasswordStrength } from "../../../helpers/getPasswordStrangth";
 import { showError } from "../../../helpers/toastify/error";
 import { OverridableStringUnion } from "@mui/types";
 import { ColorPaletteProp } from "@mui/joy/styles/types";
+import { AlternativeEntrance } from "../../../entities/alternativeEntrance";
 
 const styles = {
   fontFamily: "Montserrat",
@@ -38,7 +38,13 @@ const CreateAccountForm = () => {
   const [reEnteredPassword, setReEnteredPassword] = useState<string | null>(
     null
   );
-  const [progressColor, setProgressColor] = useState<OverridableStringUnion<ColorPaletteProp, LinearProgressPropsColorOverrides> | undefined>("danger");
+  const [progressColor, setProgressColor] = useState<
+    | OverridableStringUnion<
+        ColorPaletteProp,
+        LinearProgressPropsColorOverrides
+      >
+    | undefined
+  >("danger");
 
   const [score, setScore] = useState<number>(0);
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -106,14 +112,14 @@ const CreateAccountForm = () => {
           label="Email"
           type="email"
           size="small"
-          {...register('email')}
+          {...register("email")}
           required={true}
         />
         <TextField
           label="Account name"
           type="Text"
           size="small"
-          {...register('displayName')}
+          {...register("displayName")}
           required={true}
         />
         <FormControl
@@ -196,12 +202,12 @@ const CreateAccountForm = () => {
           label="Master password hint"
           type="text"
           size="small"
-          {...register('hint')}
+          {...register("hint")}
         />
         <Button type="submit" variant="contained" sx={styles}>
           Create account
         </Button>
-        <AlternativeEntryLine
+        <AlternativeEntrance
           labelText="Already registered?"
           buttonText="Sign in"
           direction={"/"}

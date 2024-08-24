@@ -13,7 +13,7 @@ export type TypeLoginForm = {
   email: string | null;
   emailEntered: boolean;
   password: string | null;
-  emailIsRemembered: boolean;
+  emailIsRemembered: string | boolean;
 };
 
 export type TypeRegisterForm = {

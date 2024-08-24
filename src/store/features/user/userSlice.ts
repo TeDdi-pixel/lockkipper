@@ -99,6 +99,7 @@ export const userSlice = createSlice({
       .addCase(logOutUser.fulfilled, (state, action) => {
         if (action.payload) {
           Cookies.remove("user");
+          Cookies.remove("email");
           state.userLoggedIn = false;
           state.user = false;
           state.profilePhoto = false;
