@@ -1,7 +1,7 @@
 import { lazy } from "react";
-import CreateAccountForm from "../../features/CreateAccountForm";
 import VaultPage from "../../pages/vault/VaultPage";
 import AccountPage from "../../pages/account/AccountPage";
+import { CreateAccountForm } from "../../features/forms/createAccountForm";
 
 const StartPage = lazy(() => import("../../pages/startPage/StartPage"));
 export const routes = [

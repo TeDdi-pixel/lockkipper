@@ -25,7 +25,10 @@ export const EmailForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="form">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="mt-[40px] flex flex-col gap-4 border-border border rounded pt-[30px] px-6 pb-6"
+    >
       <EmailFormField register={register} setValue={setValue} />
       <ContinueButton />
       <GoogleEntrance />

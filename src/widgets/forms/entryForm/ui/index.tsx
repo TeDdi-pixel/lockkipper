@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../store/types/types";
-import CreateAccountForm from "../../../../features/CreateAccountForm";
-import GetPasswordForm from "../../../../features/GetPasswordForm";
 import { EmailForm } from "../../../../features/forms/emailForm";
+import { PasswordForm } from "../../../../features/forms/passwordForm";
+import { CreateAccountForm } from "../../../../features/forms/createAccountForm";
 
 export const EntryForm = () => {
   const { currentForm } = useSelector((state: RootState) => state.auth);
@@ -11,7 +11,7 @@ export const EntryForm = () => {
     case "emailForm":
       return <EmailForm />;
     case "passwordForm":
-      return <GetPasswordForm />;
+      return <PasswordForm />;
     case "createAccountForm":
       return <CreateAccountForm />;
     default:

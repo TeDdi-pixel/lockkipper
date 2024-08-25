@@ -8,7 +8,7 @@ import {
   setEmail,
 } from "../../../store/features/authorization/authSlice";
 
-type AlternativeEntrance = {
+type Props = {
   buttonText: string;
   labelText: string;
   direction: string;
@@ -20,7 +20,7 @@ export const AlternativeEntrance = ({
   labelText,
   direction,
   currentForm,
-}: AlternativeEntrance) => {
+}: Props) => {
   const dispatch = useDispatch();
 
   const switchCurrentForm = () => {
@@ -32,7 +32,7 @@ export const AlternativeEntrance = ({
     <Box display="flex" alignItems="center" justifyContent="center">
       <CustomTypography text={labelText} fontSize={"12px"} />
       <Button variant="text" onClick={switchCurrentForm}>
-        <Link to={direction} className="text-red">
+        <Link to={direction} className="text-primary">
           <CustomTypography
             text={buttonText}
             fontWeight={500}
