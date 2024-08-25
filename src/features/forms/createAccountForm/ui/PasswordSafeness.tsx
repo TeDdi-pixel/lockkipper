@@ -15,7 +15,7 @@ export const PasswordSafeness = ({ progressColor, password }: Props) => {
     <LinearProgress
       variant="determinate"
       value={passwordSafeness}
-      color={progressColor}
+      color={progressColor as any}
       sx={{
         "--LinearProgress-progressThickness": "5px",
         transition: "all 0.5s ease",

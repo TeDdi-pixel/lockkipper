@@ -37,7 +37,7 @@ export const CreateAccountForm = () => {
     <EntryFormLayout styles={{ paddingTop: "40px" }}>
       <Title />
       <form
-        className="mt-[40px] flex flex-col gap-4 border-border border rounded pt-[30px] px-6 pb-6"
+        className="mt-[7px] flex flex-col gap-4 border-border border rounded pt-[30px] px-6 pb-6"
         onSubmit={handleSubmit(onSubmit)}
       >
         <EmailField register={register} />
