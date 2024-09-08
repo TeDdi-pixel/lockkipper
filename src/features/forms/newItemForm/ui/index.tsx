@@ -27,7 +27,7 @@ export const NewItemForm = () => {
   if (!handleSubmit || !control || !register) return null;
 
   const onSubmit = async (data: TypeInnerFormData) => {
-    if (itemLoading && isEmptyObj(vaultItem) && vaultItemId) {
+    if (!itemLoading && !isEmptyObj(vaultItem) && vaultItemId) {
       await updateItem(user.uid, data?.folder, data, vaultItemId);
     } else dispatch(createItem(data));
 

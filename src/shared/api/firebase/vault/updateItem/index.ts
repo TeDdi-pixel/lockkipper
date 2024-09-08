@@ -10,10 +10,13 @@ export const updateItem = async (
   item: TypeInnerFormData,
   itemId: string
 ) => {
+  const formType = item.formType || "Login";
+  const newItem = { ...item, formType: formType };
+
   try {
     const docRef = doc(db, `vaults/${uid}/folders/${folder ?? "No folder"}`);
     await updateDoc(docRef, {
-      [itemId]: item,
+      [itemId]: newItem,
     });
     notify(`Item has been successfully updated!`);
   } catch (error) {
