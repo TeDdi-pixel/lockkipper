@@ -5,7 +5,8 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../store/types/types";
 import { deleteFolderItem } from "../../../shared/api/firebase/vault/deleteFolderItem/deleteFolderItem";
 
-const ThreeDots = ({ itemId, folder }: { itemId: number; folder: string }) => {
+const ThreeDots = ({ itemId, folder }: any) => {
+  //{ itemId: number; folder: string }
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const { user } = useSelector((state: RootState) => state.user);
   const open = Boolean(anchorEl);

@@ -9,7 +9,7 @@ export type RootState = {
   registerForm: TypeRegisterForm;
   user: TypeUserSlice;
   auth: TypeAuthSlice;
-  vault: n;
+  vault: any;
 };
 
 export type TypeCurrentForm =
@@ -65,4 +65,3 @@ export type TypeVault = {
   currentForm: TypeNewForm | null;
   formType: TypeForm;
 };
-

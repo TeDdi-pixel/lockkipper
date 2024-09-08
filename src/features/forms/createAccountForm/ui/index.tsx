@@ -6,7 +6,6 @@ import { createAccount } from "../../../../store/asyncThunks/createAccount";
 import EntryFormLayout from "../../../../layout/entryFormLayout/EntryFormLayout";
 import { AlternativeEntrance } from "../../../../entities/alternativeEntrance";
 import { PasswordField } from "./PasswordField";
-import { PasswordSafeness } from "./PasswordSafeness";
 import { RePasswordField } from "./RePasswordField";
 import PasswordHint from "./PasswordHint";
 import SubmitButton from "./SubmitButton";
@@ -19,8 +18,6 @@ export const CreateAccountForm = () => {
   const { register, handleSubmit } = useForm<TypeRegistration>();
   const dispatch = useDispatch<AppDispatch>();
   const {
-    progressColor,
-    password,
     checkPasswordMatch,
     handlePasswordChange,
     handleReEnteredPasswordChange,

@@ -13,7 +13,7 @@ export const vaultSlice = createSlice({
     formType: "Login",
     vaultItem: {},
     itemLoading: false,
-    vaultItemId: null,
+    vaultItemId: null as string | null,
   },
   reducers: {
     openForm: (state, action) => {

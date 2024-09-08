@@ -13,7 +13,7 @@ export const NewFolderForm = () => {
   const { handleSubmit, register } = useForm();
   const dispatch = useDispatch<AppDispatch>();
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: any) => {
     const { folder } = data;
 
     dispatch(closeForm());
