@@ -1,35 +1,26 @@
-import { ReactNode, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { RootState } from "../../store/types/types";
+import { ReactNode } from "react";
 import { ToastContainer } from "react-toastify";
 import { Menu } from "../../widgets/menu";
 import { Header } from "../../widgets/header";
-type TypeProps = {
+import { useRedirect } from "../../hooks/useRedirect";
+import useWindow from "../../hooks/useWindow";
+
+type Props = {
   children: ReactNode;
   title: string;
 };
 
-const DefaultLayout = ({ children, title }: TypeProps) => {
-  const navigate = useNavigate();
-  const { pathname } = useLocation();
-  const { userLoggedIn } = useSelector((state: RootState) => state.user);
-
-  useEffect(() => {
-    if (userLoggedIn && pathname === "/") {
-      navigate("/vaults/my_vault");
-    } else if (!userLoggedIn && pathname !== "/") {
-      navigate("/");
-    }
-  }, [userLoggedIn]);
+const DefaultLayout = ({ children, title }: Props) => {
+  useRedirect(); //Redirects user to of from '/' path depends on userLoggedIn variable status
+  useWindow();
 
   return (
-    <div className="flex h-[100%]">
-      <ToastContainer style={{ zIndex: "2000" }} />
-      <Menu />
-      <div className="content__wrapper">
+    <div className="flex">
+      <ToastContainer className="z-[2000]" />
+      <div className="w-full p-[21px] relative">
         <Header title={title} />
-        <main className="flex ml-[230px]">{children}</main>
+        <Menu />
+        <main className="flex flex-col ml-[230px]">{children}</main>
       </div>
     </div>
   );

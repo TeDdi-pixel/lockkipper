@@ -2,8 +2,8 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { db } from "../../lib/firebase/config";
 import { doc, updateDoc } from "firebase/firestore";
 import { RootState } from "../types/types";
-import { uploadProfilePhoto } from "../../helpers/uploadUserPhoto";
-import { downloadUserPhoto } from "../../helpers/downloadUserPhoto";
+import { uploadProfilePhoto } from "../../shared/api/firebase/storage/uploadUserPhoto";
+import { downloadUserPhoto } from "../../shared/api/firebase/storage/downloadUserPhoto";
 import { showError } from "../../helpers/toastify/error";
 
 export const updateUserPhoto = createAsyncThunk(

@@ -4,6 +4,7 @@ import { auth, db } from "../../lib/firebase/config";
 import { doc, setDoc } from "firebase/firestore";
 import { TypeRegistration } from "../../features/forms/types/types";
 import { showError } from "../../helpers/toastify/error";
+import { createDefaultVault } from "../../shared/api/firebase/vault/createDefaultVault/createDefaultVault";
 
 export const createAccount = createAsyncThunk(
   "user/createAccount",
@@ -15,7 +16,11 @@ export const createAccount = createAsyncThunk(
     }
 
     try {
-      const { user: fullUser } = await createUserWithEmailAndPassword(auth, email, password);
+      const { user: fullUser } = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
 
       const user = {
         uid: fullUser.uid,
@@ -27,6 +32,7 @@ export const createAccount = createAsyncThunk(
 
       const docRef = doc(db, "users", user.uid);
       await setDoc(docRef, user);
+      await createDefaultVault(user.uid);
 
       return user;
     } catch (error) {

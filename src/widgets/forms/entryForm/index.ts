@@ -1,1 +1,1 @@
-export { EntryForm } from "./ui";
+export { EntryForm } from "./modul";

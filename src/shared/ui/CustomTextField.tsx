@@ -1,57 +1,59 @@
-import { TextField, TextFieldProps } from "@mui/material";
-import { FieldValues, UseFormRegister } from "react-hook-form";
-import { ReactNode } from "react";
+import {
+  CircularProgress,
+  InputAdornment,
+  TextField,
+} from "@mui/material";
+import { UseFormRegister } from "react-hook-form";
+import { RootState } from "../../store/types/types";
+import { useSelector } from "react-redux";
 
-type TypeProps = TextFieldProps & {
-  inputStyles?: Record<string, string | number>;
-  registerKey:
-    | "email"
-    | "password"
-    | "displayName"
-    | "exampleRequired"
-    | "emailIsRemembered"
-    | "reEnteredPassword"
-    | "hint";
-  register: UseFormRegister<FieldValues>;
-  children?: ReactNode;
-  value: string | null;
+type Props = {
+  register: UseFormRegister<any>;
+  name: string;
+  label: string;
+  required?: boolean;
+  placeholder?: string;
+  type?: "text";
+  multiline?: boolean;
+  rows?: number;
+  defaultValue?: string;
 };
 
-const CustomTextField = ({
-  size = "small",
-  label,
-  variant = "outlined",
-  required = false,
-  inputStyles = {
-    fontSize: "14px",
-    fontWeight: 500,
-    fontFamily: "Montserrat",
-  },
-  registerKey,
+export const CustomTextField = ({
   register,
-  type,
-  children,
-  value,
-  onChange,
-}: TypeProps) => {
+  name,
+  label,
+  required = false,
+  placeholder,
+  type = "text",
+  multiline,
+  rows,
+  defaultValue,
+}: Props) => {
+  const { itemLoading } = useSelector((state: RootState) => state.vault);
+  
   return (
     <TextField
-      type={type}
-      size={size}
+      placeholder={placeholder}
       label={label}
-      variant={variant}
+      fullWidth
+      defaultValue={itemLoading ? "" : defaultValue}
+      rows={rows}
+      multiline={multiline}
+      type={type}
       required={required}
+      size="small"
       InputLabelProps={{
-        sx: inputStyles,
+        shrink: true,
       }}
-      inputProps={{ maxLength: 32 }}
-      value={value}
-      {...register(registerKey)}
-      onChange={onChange}
-    >
-      {children}
-    </TextField>
+      InputProps={{
+        endAdornment: itemLoading ? (
+          <InputAdornment position="start">
+            <CircularProgress size={20} />
+          </InputAdornment>
+        ) : null,
+      }}
+      {...register(name)}
+    />
   );
 };
-
-export default CustomTextField;

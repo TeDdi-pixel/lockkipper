@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import useCompression from "./useCompression";
 import { ThunkDispatch } from "redux-thunk";
 import { ChangeEvent } from "react";
-import { uploadProfilePhoto } from "../helpers/uploadUserPhoto";
+import { uploadProfilePhoto } from "../shared/api/firebase/storage/uploadUserPhoto";
 import { updateUserPhoto } from "../store/asyncThunks/updateUserPhoto";
 import { showError } from "../helpers/toastify/error";
 import { RootState } from "../store/types/types";

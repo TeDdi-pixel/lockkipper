@@ -7,6 +7,7 @@ export type TypeCellsData = {
   name: string;
   description: string;
   owner: string;
+  folder: string;
 };
 
 export const cellsData = [

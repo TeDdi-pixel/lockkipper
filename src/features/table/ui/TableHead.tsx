@@ -5,13 +5,13 @@ type TypeProps = {
   handleCheckAll: () => void;
   allChecked: boolean;
 };
-const headCellStyles = "p-[10px] text-text font-semibold";
+const headCellStyles = "p-[10px] text-text font-semibold text-left";
 
-const TableHead = ({ handleCheckAll, allChecked }: TypeProps) => {
+export const TableHead = ({ handleCheckAll, allChecked }: TypeProps) => {
   return (
     <thead>
       <tr className="border-b-2 border-border">
-        <th className={`${headCellStyles} first: min-w-[84px] w-[132px]`}>
+        <th className={`${headCellStyles} first:max-w-[84px] first:w-[84px]`}>
           <Checkbox
             size="small"
             onChange={handleCheckAll}
@@ -29,4 +29,3 @@ const TableHead = ({ handleCheckAll, allChecked }: TypeProps) => {
   );
 };
 
-export default TableHead;

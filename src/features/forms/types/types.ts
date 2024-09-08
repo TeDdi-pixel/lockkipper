@@ -8,7 +8,7 @@ export type TypeLogin = {
 export type TypeRegistration = {
   uid: string;
   email: string;
-  displayName: string;
+  userName: string;
   password: string;
   reEnteredPassword: string;
   hint: string;

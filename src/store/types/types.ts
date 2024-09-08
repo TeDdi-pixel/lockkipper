@@ -1,3 +1,4 @@
+import { TypeForm } from "../../features/forms/newItemForm/types/types";
 import { TypeRegistration } from "../../features/forms/types/types";
 import store from "../store";
 
@@ -8,6 +9,7 @@ export type RootState = {
   registerForm: TypeRegisterForm;
   user: TypeUserSlice;
   auth: TypeAuthSlice;
+  vault: n;
 };
 
 export type TypeCurrentForm =
@@ -55,3 +57,12 @@ export type TypeMyAccountForm = {
   newEmail?: string;
   newDisplayName?: string;
 };
+
+export type TypeNewForm = "newItemForm" | "newFolderForm";
+
+export type TypeVault = {
+  formIsOpen: boolean;
+  currentForm: TypeNewForm | null;
+  formType: TypeForm;
+};
+

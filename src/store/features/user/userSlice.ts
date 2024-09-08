@@ -15,7 +15,7 @@ const updateUserState = (state: TypeUserSlice, user: TypeUser | null) => {
   if (user) {
     state.user = user;
     state.userLoggedIn = true;
-    state.profilePhoto = user.photoURL ?? null;
+    state.profilePhoto = user.photoURL ?? 'Anonymous';
     setUserCookies(user);
   }
 };
@@ -31,7 +31,7 @@ export const userSlice = createSlice({
     setUser: (state, action: PayloadAction<TypeUser | null>) => {
       state.user && updateUserState(state, action.payload);
     },
-    setProfilePhoto: (state, action: PayloadAction<string | null>) => {
+    setProfilePhoto: (state, action: PayloadAction<string>) => {
       state.profilePhoto = action.payload;
       if (state.user) {
         state.user.photoURL = action.payload;

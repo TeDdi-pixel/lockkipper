@@ -6,8 +6,10 @@ const ProfileImage = ({ width, height }: { width: string; height: string }) => {
   const { profilePhoto } = useSelector((state: RootState) => state.user);
 
   return (
-    <div className={`rounded-full overflow-hidden ${width} ${height} flex-shrink-0 aspect-square`}>
-      {profilePhoto ? (
+    <div
+      className={`rounded-full overflow-hidden ${width} ${height} flex-shrink-0 aspect-square`}
+    >
+      {profilePhoto && profilePhoto !== "Anonymous" ? (
         <img
           className="object-cover w-full h-full"
           src={profilePhoto}

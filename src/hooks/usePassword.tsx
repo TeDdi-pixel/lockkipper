@@ -13,7 +13,7 @@ const usePassword = () => {
   );
   const [score, setScore] = useState<number>(0);
   const [progressColor, setProgressColor] =
-  useState<TypeProgressColor>("danger");
+  useState<TypeProgressColor>("primary");
   const dispatch = useDispatch()
   
   const handleShowPassword = () => setShowPassword((show) => !show);

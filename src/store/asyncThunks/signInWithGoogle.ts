@@ -5,6 +5,7 @@ import { doc, getDoc, setDoc } from "firebase/firestore";
 import { TypeUser } from "../types/types";
 import { setUser } from "../features/user/userSlice";
 import { showError } from "../../helpers/toastify/error";
+import { createDefaultVault } from "../../shared/api/firebase/vault/createDefaultVault/createDefaultVault";
 
 export const signInWithGoogle = createAsyncThunk<TypeUser | undefined, void>(
   "user/signInWithGoogle",
@@ -26,6 +27,7 @@ export const signInWithGoogle = createAsyncThunk<TypeUser | undefined, void>(
 
       if (!docSnap.exists()) {
         await setDoc(docRef, user);
+        await createDefaultVault(user.uid);
         dispatch(setUser(user));
         return user;
       }

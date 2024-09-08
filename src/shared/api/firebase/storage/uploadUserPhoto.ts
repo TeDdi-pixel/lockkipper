@@ -1,6 +1,6 @@
 import { ref, uploadString } from "firebase/storage";
-import { storage } from "../lib/firebase/config";
-import { showError } from "./toastify/error";
+import { storage } from "../../../../lib/firebase/config";
+import { showError } from "../../../../helpers/toastify/error";
 
 export const uploadProfilePhoto = async (
   uid: string,

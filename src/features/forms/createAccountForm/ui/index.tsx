@@ -10,10 +10,10 @@ import { PasswordSafeness } from "./PasswordSafeness";
 import { RePasswordField } from "./RePasswordField";
 import PasswordHint from "./PasswordHint";
 import SubmitButton from "./SubmitButton";
-import AccountNameField from "./AccountNameField";
 import EmailField from "./EmailField";
 import Title from "./Title";
 import usePassword from "../../../../hooks/usePassword";
+import AccountNameField from "./AccountNameField";
 
 export const CreateAccountForm = () => {
   const { register, handleSubmit } = useForm<TypeRegistration>();
@@ -43,7 +43,7 @@ export const CreateAccountForm = () => {
         <EmailField register={register} />
         <AccountNameField register={register} />
         <PasswordField register={register} onChange={handlePasswordChange} />
-        <PasswordSafeness progressColor={progressColor} password={password} />
+        {/* <PasswordSafeness progressColor={progressColor} password={password} /> */}
         <RePasswordField
           register={register}
           onChange={handleReEnteredPasswordChange}
