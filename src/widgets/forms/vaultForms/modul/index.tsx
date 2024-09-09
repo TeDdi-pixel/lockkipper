@@ -23,8 +23,8 @@ export const VaultForm = () => {
       onClick={handleClose}
       className={`absolute transition-all duration-300 ease-in-out left-1/2 -translate-x-1/2 w-full h-[100vh] top-0 inset-0 bg-black bg-opacity-10 backdrop-blur-sm origin-center ${
         formIsOpen
-          ? "opacity-100 translate-y-0 z-50"
-          : "opacity-0 -translate-y-7 -z-50"
+          ? "opacity-100 scale-100 z-50"
+          : "opacity-0  scale-0 -z-50"
       }`}
     >
       {form}
