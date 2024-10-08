@@ -4,6 +4,7 @@ import { ThemeProvider } from "@mui/material";
 import { FONT } from "./font";
 
 function App() {
+  
   return (
     <ThemeProvider theme={FONT}>
       <SpeedInsights />

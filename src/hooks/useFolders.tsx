@@ -31,7 +31,7 @@ const useFolders = (folderType: "filterFolder" | "selectFolder") => {
       const foldersCollectionRef = collection(db, `vaults/${uid}/folders`);
       const querySnapshot = await getDocs(foldersCollectionRef);
 
-      querySnapshot.docs.map((doc) => {
+      querySnapshot.docs.forEach((doc) => {
         const mapFolder = folderMap.get(folderType);
         if (mapFolder) setFolders((prev) => [...prev, mapFolder(doc.id)]);
       });

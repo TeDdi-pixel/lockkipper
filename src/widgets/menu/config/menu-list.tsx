@@ -15,23 +15,23 @@ export const menuList = [
     id: 1,
     icon: <PiTelegramLogo />,
     name: "Send",
-    pathname: "/sends",
+    pathname: "#", // /sends
   },
   {
     id: 2,
     icon: <FiTool />,
     name: "Tools",
     options: [
-      { id: 0, name: "Generator", pathname: "/tools/generator" },
-      { id: 1, name: "Import data", pathname: "/tools/import" },
-      { id: 2, name: "Export vault", pathname: "/tools/export" },
+      { id: 0, name: "Generator", pathname: "#" }, // /tools/generator
+      { id: 1, name: "Import data", pathname: "#" }, // /tools/import
+      { id: 2, name: "Export vault", pathname: "#" }, // /tools/export
     ],
   },
   {
     id: 3,
     icon: <VscSettings />,
     name: "Reports",
-    pathname: "/reports",
+    pathname: "#", // /reports
   },
   {
     id: 4,
@@ -42,19 +42,19 @@ export const menuList = [
       {
         id: 1,
         name: "Security",
-        pathname: "/settings/security/change-password",
+        pathname: "#", // /settings/security/change-password
       },
-      { id: 2, name: "Preferences", pathname: "/settings/preferences" },
+      { id: 2, name: "Preferences", pathname: "#" }, // /settings/preferences
       {
         id: 4,
         name: "Subscription",
-        pathname: "/settings/subscription/premium",
+        pathname: "#", // /settings/subscription/premium
       },
-      { id: 5, name: "Domain rules", pathname: "/settings/domain_rules" },
+      { id: 5, name: "Domain rules", pathname: "#" }, // /settings/domain_rules
       {
         id: 6,
         name: "Emergency access",
-        pathname: "/settings/emergency_access",
+        pathname: "#", // /settings/emergency_access
       },
     ],
   },

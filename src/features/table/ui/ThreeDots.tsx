@@ -1,15 +1,17 @@
 import { Button, Menu, MenuItem } from "@mui/material";
 import { MouseEvent, useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store/types/types";
 import { deleteFolderItem } from "../../../shared/api/firebase/vault/deleteFolderItem/deleteFolderItem";
+import { deleteCellItem } from "../../../store/features/vault/vaultSlice";
 
 const ThreeDots = ({ itemId, folder }: any) => {
   //{ itemId: number; folder: string }
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const { user } = useSelector((state: RootState) => state.user);
   const open = Boolean(anchorEl);
+  const dispatch = useDispatch()
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -18,8 +20,8 @@ const ThreeDots = ({ itemId, folder }: any) => {
     if (!user) {
       throw new Error("User is not found");
     }
-
-    return await deleteFolderItem(user.uid, itemId, folder);
+    await deleteFolderItem(user.uid, itemId, folder);
+    dispatch(deleteCellItem(itemId));
   };
   const handleClose = () => {
     setAnchorEl(null);

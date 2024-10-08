@@ -13,7 +13,7 @@ export const setVaultItem = createAsyncThunk(
     }
 
     const vaultItem = await getItem(itemId, user.uid);
-    
+
     return vaultItem;
   }
 );

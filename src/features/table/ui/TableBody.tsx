@@ -2,8 +2,8 @@ import { Checkbox } from "@mui/material";
 import { TypeCellsData } from "../../../widgets/contentTable/config/config";
 import { SkeletonItems } from "./SkeletonItems";
 import ThreeDots from "./ThreeDots";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../../store/types/types";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../../store/types/types";
 import { setVaultItem } from "../../../store/asyncThunks/setVaultItem";
 import { MouseEvent } from "react";
 import {
@@ -12,7 +12,6 @@ import {
 } from "../../../store/features/vault/vaultSlice";
 
 type TypeProps = {
-  data: TypeCellsData[];
   checkedItems: number[];
   handleCheckbox: (itemId: number) => void;
   loading: boolean;
@@ -20,11 +19,11 @@ type TypeProps = {
 
 export const TableBody = ({
   loading,
-  data,
   checkedItems,
   handleCheckbox,
 }: TypeProps) => {
   const dispatch = useDispatch<AppDispatch>();
+  const { cellsData } = useSelector((state: RootState) => state.vault);
 
   const handleClick = (e: MouseEvent<HTMLTableCellElement>) => {
     const itemId = e.currentTarget.id;
@@ -38,7 +37,7 @@ export const TableBody = ({
       {loading ? (
         <SkeletonItems />
       ) : (
-        data.map((cell) => (
+        cellsData.map((cell: TypeCellsData) => (
           <tr key={cell.id} className="h-[40px] border-t border-border">
             <td className="h-[65px] p-[10.5px] pr-0 flex items-center justify-between">
               <Checkbox
@@ -52,7 +51,7 @@ export const TableBody = ({
             </td>
             <td
               className="p-[10.5px]"
-              onClick={(e) => handleClick(e)}
+              onClick={handleClick}
               id={`${cell.id}`}
             >
               <div className="flex flex-col justify-between gap-[5px]">

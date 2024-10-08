@@ -7,28 +7,23 @@ export const getItemsForTable = (
   uid: string,
   callback: (items: TypeCellsData[]) => void
 ) => {
-  const unsubscribe = onSnapshot(
-    collection(db, `vaults/${uid}/folders`),
-    (snapshot) => {
-      const allItems: TypeCellsData[] = [];
+  onSnapshot(collection(db, `vaults/${uid}/folders`), (snapshot) => {
+    const allItems: TypeCellsData[] = [];
 
-      snapshot.docs.forEach((folder) => {
-        const folderData = folder.data();
+    snapshot.docs.forEach((folder) => {
+      const folderData = folder.data();
 
-        Object.keys(folderData).forEach((key) => {
-          const item = folderData[key];
-          const newItem = formattedItem(item, key);
-          if (newItem) allItems.push(newItem);
-        });
+      Object.keys(folderData).forEach((key) => {
+        const item = folderData[key];
+        const newItem = formattedItem(item, key);
+        if (newItem) allItems.push(newItem);
       });
+    });
 
-      const allItemsToSorted: TypeCellsData[] = [...allItems].sort((a, b) =>
-        a.name.localeCompare(b.name)
-      );
+    const allItemsToSorted: TypeCellsData[] = [...allItems].sort((a, b) =>
+      a.name.localeCompare(b.name)
+    );
 
-      callback(allItemsToSorted);
-
-      return { unsubscribe };
-    }
-  );
+    callback(allItemsToSorted);
+  });
 };
