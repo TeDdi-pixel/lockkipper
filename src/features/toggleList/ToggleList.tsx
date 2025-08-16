@@ -27,7 +27,7 @@ const ToggleList = ({
 
   const className = `text-primary-foreground relative flex items-center gap-[10px] cursor-pointer select-none ${
     active
-      ? "z-20 opacity-100 h-[25px] max-h-[25px] translate-y-1.5 hover:text-primary scale-100 hover:translate-x-1"
+      ? "z-20 opacity-100 h-[25px] max-h-[25px] translate-y-1.5 hover:text-primary scale-100 hover:pl-[5px]"
       : "h-0 max-h-0 translate-y-0 -z-[100] opacity-0 scale-0"
   }`;
 
@@ -51,7 +51,7 @@ const ToggleList = ({
         <div
           style={{
             transition:
-              "color 0.1s ease, opacity 0.1s ease, height 0.2s ease, max-height 0.2s ease, transform 0.2s ease, scale ease 0.2s",
+              "color 0.1s ease, opacity 0.1s ease, height 0.2s ease, max-height 0.2s ease, transform 0.2s ease, scale ease 0.2s, padding ease 0.2s",
           }}
           className={className}
           key={"Refresh item"}
@@ -75,7 +75,7 @@ const ToggleList = ({
         <div
           style={{
             transition:
-              "color 0.1s ease, opacity 0.1s ease, height 0.2s ease, max-height 0.2s ease, transform 0.2s ease, scale 0.2s ease",
+              "color 0.1s ease, opacity 0.1s ease, height 0.2s ease, max-height 0.2s ease, transform 0.2s ease, scale 0.2s ease, padding ease 0.2s",
             transitionDelay: `${index * 10}ms`,
           }}
           className={className}
